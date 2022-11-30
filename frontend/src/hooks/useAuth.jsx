@@ -7,7 +7,7 @@ import { auth } from "../utils/firebase"
 
 export const useAuth = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(null)
-    const [isVeryifying, setIsVerifying] = useState(true)
+    const [isVerifying, setIsVerifying] = useState(true)
     const setUser = useAuthStore(state => state.setUser)
 
     useEffect(() => {
@@ -28,5 +28,5 @@ export const useAuth = () => {
 
     }, [])
 
-    return {isAuthenticated, isVeryifying}
+    return {isAuthenticated, isVerifying}
 }

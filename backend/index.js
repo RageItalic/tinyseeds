@@ -14,32 +14,28 @@ app.use(bodyParser.json());
 app.use(cors());
 
 //Stripe
-
-// app.use(express.static("public"));
-
 app.post("/create-checkout-session", async (req, res) => {
+  //let orderDetails = req.body;
+  let orderDetails = [
+    {
+      price: "price_1M9hkMJYmNxO345SESnrsx1x",
+      quantity: 1,
+    },
+    {
+      price: "price_1M9hlaJYmNxO345SAPMAk955",
+      quantity: 3,
+    },
+  ];
+
   const session = await stripe.checkout.sessions.create({
-    line_items: [
-      {
-        // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-        price: "price_1M9hnaJYmNxO345SLhLn5Lto",
-        quantity: 1,
-      },
-    ],
+    line_items: orderDetails,
     mode: "payment",
-    success_url: `http://localhost:8080/success`, //NEEDS TO BE UPDATED
-    cancel_url: `http://localhost:8080/error`,
+    success_url: `http://127.0.0.1:5173/checkout/success`,
+    cancel_url: `http://127.0.0.1:5173/checkout/error`,
   });
 
   console.log(session.url);
   res.status(200).json({ url: session.url });
-});
-
-app.get("/success", (req, res) => {
-  console.log("Stripe succeeded, Poop\n");
-});
-app.get("/error", (req, res) => {
-  console.log("Stripe failed, Poop\n");
 });
 
 app.get("/", (request, response) => {
