@@ -31,15 +31,9 @@ const Plants = () => {
     }
 
     return (
-        <div>
+        <div style={{display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column"}}>
+            <h1>All Plants</h1>
             <PlantsGrid />
-            {/* <ul>
-                {fakeDataArray.map((post) => (
-                    <Link to={`/plants/${post.id}`} key={post.id}>
-                        <li>{post.title}</li>
-                    </Link>
-                ))}
-            </ul> */}
         </div>
     )
 }

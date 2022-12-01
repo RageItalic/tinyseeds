@@ -4,12 +4,15 @@ import { useState, useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../hooks/useAuth"
 import useAuthStore from "../store/auth"
+import useCartStore from "../store/cart"
 import { auth } from "../utils/firebase"
 
 const Nav = () => {
     const navigate = useNavigate()
     const user = useAuthStore(state => state.user)
     const setUser = useAuthStore(state => state.setUser)
+    const cart = useCartStore(state => state.cart)
+    const addToCart = useCartStore(state => state.addToCart)
     const {isAuthenticated, isVerifying} = useAuth()
 
     async function handleUserSignOut() {
@@ -26,6 +29,14 @@ const Nav = () => {
         }
     }
 
+    useEffect(() => {
+        // get cart from localstorage on page refresh
+        if (cart.length === 0) {
+            let newCart = JSON.parse(localStorage.getItem('cart'))
+            addToCart([...newCart])
+        }
+    }, [])
+
     return (
         <nav>
             {isVerifying && <p>loading...</p>}
@@ -33,6 +44,7 @@ const Nav = () => {
             ?   <>
                     <p>Logged in as {user.displayName ?? user.email}</p>
                     <button onClick={() => handleUserSignOut()}>Sign out</button>
+                    <p>CART ({cart.length} items)</p>
                 </>
             :   <>
                     <Link to="/signup">Sign up</Link>
