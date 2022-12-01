@@ -737,13 +737,13 @@ textarea.w-input, textarea.w-select {
     height:20px
 }
 
-.w_container {
+.w-container {
     margin-left: auto;
     margin-right: auto;
     max-width:940px
 }
 
-.w_container:before, .w_container:after {
+.w-container:before, .w-container:after {
     content: " ";
     display: table;
     grid-column-start: 1;
@@ -752,11 +752,11 @@ textarea.w-input, textarea.w-select {
     grid-row-end:2
 }
 
-.w_container:after {
+.w-container:after {
     clear:both
 }
 
-.w_container .w-row {
+.w-container .w-row {
     margin-left: -10px;
     margin-right:-10px
 }
@@ -846,7 +846,7 @@ textarea.w-input, textarea.w-select {
 }
 
 @media screen and (max-width: 991px) {
-    .w_container {
+    .w-container {
         max-width:728px
     }
 
@@ -926,7 +926,7 @@ textarea.w-input, textarea.w-select {
         display:none !important
     }
 
-    .w-row, .w_container .w-row {
+    .w-row, .w-container .w-row {
         margin-left: 0;
         margin-right:0
     }
@@ -987,7 +987,7 @@ textarea.w-input, textarea.w-select {
 }
 
 @media screen and (max-width: 479px) {
-    .w_container {
+    .w-container {
         max-width:none
     }
 
@@ -5238,7 +5238,7 @@ blockquote {
     background-color: #b4b9ac;
 }
 
-.content_wrapper {
+.content-wrapper {
     position: relative;
     width: 100%;
     height: 100%;
@@ -5255,7 +5255,7 @@ blockquote {
     grid-template-rows: auto auto;
 }
 
-.content_wrapper.navigation {
+.content-wrapper.navigation {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -8283,13 +8283,20 @@ blockquote {
     -ms-flex-align: start;
     align-items: flex-start;
 }
-
+/* 
 .product-name {
     margin-top: 10px;
     margin-bottom: 0px;
     font-size: 26px;
     line-height: 32px;
-}
+} */
+
+/* .productname {
+    margin-top: 10px;
+    margin-bottom: 0px;
+    font-size: 26px;
+    line-height: 32px;
+} */
 
 .accordion {
     margin-bottom: 8px;
@@ -9431,7 +9438,7 @@ blockquote {
         color: #69707b;
     }
 
-    .content_wrapper {
+    .content-wrapper {
         max-width: 1301px;
     }
 
@@ -9476,7 +9483,7 @@ blockquote {
 }
 
 @media screen and (min-width: 1440px) {
-    .content_wrapper {
+    .content-wrapper {
         max-width: 1340px;
     }
 
@@ -9563,11 +9570,11 @@ blockquote {
         display: none;
     }
 
-    .content_wrapper {
+    .content-wrapper {
         max-width: 100%;
     }
 
-    .content_wrapper.navigation {
+    .content-wrapper.navigation {
         padding-right: 0px;
     }
 
@@ -10535,7 +10542,7 @@ blockquote {
         line-height: 13px;
     }
 
-    .content_wrapper.navigation {
+    .content-wrapper.navigation {
         padding-right: 0px;
     }
 
