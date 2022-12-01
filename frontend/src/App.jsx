@@ -1,7 +1,4 @@
-
-import {BrowserRouter, Routes, Route, Outlet} from 'react-router-dom'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Examples from './pages/Examples'
 import Home from './pages/Home'
 import SignIn from './pages/SignIn'
@@ -10,6 +7,8 @@ import Plants from './pages/Plants'
 import IndividualPlant from './pages/IndividualPlant'
 import NotFound from './pages/NotFound'
 import Nav from './components/Nav'
+import CheckoutSuccess from './pages/CheckoutSuccess'
+import CheckoutError from './pages/CheckoutError'
 
 
 
@@ -25,6 +24,8 @@ function App() {
           <Route path="/signup" element={<SignUp/>} />
           <Route path="/plants" element={<Plants/>}/>
           <Route path="/plants/:plantID" element={<IndividualPlant />} />
+          <Route path="/checkout/success" element={<CheckoutSuccess />} />
+          <Route path="/checkout/error" element={<CheckoutError />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/examples" element={<Examples />} />
         </Routes>
