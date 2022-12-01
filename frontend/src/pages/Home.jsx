@@ -13,11 +13,11 @@ const Home = () => {
           <h1>
             <em>tiny</em>
             <br></br>seeds
-            <p className={homeStyles.description}>
+            <div className={homeStyles.description}>
               <br></br>
               <b>We love plants like you do</b>
               <p>tiny seeds is a modern plants e-commerce store.</p>
-            </p>
+            </div>
             <button type="button" id={homeStyles.myButton}>
               Go Shopping
             </button>
