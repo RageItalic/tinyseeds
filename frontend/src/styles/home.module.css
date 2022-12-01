@@ -1,10 +1,57 @@
-.container {
-    background-color:bisque;
+.home {
+  background-color: #d0d4ca;
 }
 
+body {
+  background-color: white;
+}
 
-.btn {
-    width: 100px;
-    height: 100px;
-    background-color: green;
+.flexContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  align-content: center;
+}
+
+#flexItem1 {
+  flex: 0, 0, 300px;
+}
+
+#flexItem2 {
+  flex: 0, 0, 300px;
+}
+
+.title {
+  font-size: 230%;
+  display: flex;
+  justify-content: right;
+  padding-right: 10%;
+}
+
+.description {
+  color: #3f423a;
+  font-family: Verdana;
+  display: inline;
+  justify-content: left;
+  padding-right: 0%;
+  font-size: 10%;
+}
+
+#myButton {
+  background-color: #b3b9ab;
+  font-size: 10%;
+  border-radius: 40%;
+  width: 180px;
+  height: 50px;
+}
+
+.button {
+  display: flex;
+  justify-content: right;
+  padding-right: 10%;
+}
+
+#myImage {
+  width: 80%;
+  height: 10%;
 }
