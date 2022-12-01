@@ -1,13 +1,12 @@
-import '../styles/home.css'
+import homeStyles from "../styles/home.module.css";
 
 const Home = () => {
-    return (
-        <body>        
-            <div className={styles.container}>
-                <h1>Home page</h1>
-            </div>
-        </body>
-    )
-}
+  return (
+    <div className={homeStyles.container}>
+      <h1>Home page</h1>
+      <button className={homeStyles.btn}>poop</button>
+    </div>
+  );
+};
 
-export default Home
+export default Home;

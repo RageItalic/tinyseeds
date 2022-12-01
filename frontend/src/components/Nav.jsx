@@ -1,22 +1,23 @@
 import { signOut } from "firebase/auth"
 import { child, getDatabase, ref, get, set } from "firebase/database"
 import { useState, useEffect } from "react"
-import { Link, redirect } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../hooks/useAuth"
 import useAuthStore from "../store/auth"
 import { auth } from "../utils/firebase"
 
 const Nav = () => {
+    const navigate = useNavigate()
     const user = useAuthStore(state => state.user)
     const setUser = useAuthStore(state => state.setUser)
-    const {isAuthenticated, isVeryifying} = useAuth()
+    const {isAuthenticated, isVerifying} = useAuth()
 
     async function handleUserSignOut() {
         try {
             console.log("signing out")
             await signOut(auth)
             setUser(null)
-            redirect("/")
+            navigate("/")
         } catch (e) {
             const eCode = e.code;
             const eMessage = e.message;
@@ -27,7 +28,7 @@ const Nav = () => {
 
     return (
         <nav>
-            {isVeryifying && <p>loading...</p>}
+            {isVerifying && <p>loading...</p>}
             {user && isAuthenticated
             ?   <>
                     <p>Logged in as {user.displayName ?? user.email}</p>
