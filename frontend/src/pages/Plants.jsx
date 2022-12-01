@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
+import PlantsGrid from "../components/PlantsGrid"
 
 const getFakeData = async () => {
     const response = await axios.get("https://jsonplaceholder.typicode.com/posts")
@@ -31,14 +32,14 @@ const Plants = () => {
 
     return (
         <div>
-            <h1>Plants page</h1>
-            <ul>
+            <PlantsGrid />
+            {/* <ul>
                 {fakeDataArray.map((post) => (
                     <Link to={`/plants/${post.id}`} key={post.id}>
                         <li>{post.title}</li>
                     </Link>
                 ))}
-            </ul>
+            </ul> */}
         </div>
     )
 }
