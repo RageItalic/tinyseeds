@@ -1,3 +1,36 @@
-.container {
-    background-color:aqua;
+.home {
+  background-color: #d0d4ca;
+}
+
+body {
+  background-color: white;
+}
+
+.title {
+  font-size: 250%;
+  display: flex;
+  justify-content: right;
+  padding-right: 10%;
+}
+
+.description {
+  color: #3f423a;
+  display: flex;
+  justify-content: right;
+  padding-right: 10%;
+}
+
+#myButton {
+  background-color: #b3b9ab;
+}
+
+.button {
+  display: flex;
+  justify-content: right;
+  padding-right: 10%;
+}
+
+#myImage {
+  width: 30%;
+  height: 30%;
 }
