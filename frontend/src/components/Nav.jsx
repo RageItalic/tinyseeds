@@ -33,7 +33,10 @@ const Nav = () => {
         // get cart from localstorage on page refresh
         if (cart.length === 0) {
             let newCart = JSON.parse(localStorage.getItem('cart'))
-            addToCart([...newCart])
+            console.log("testy test", newCart)
+            newCart !== null
+                ? addToCart([...newCart])
+                : addToCart([])
         }
     }, [])
 

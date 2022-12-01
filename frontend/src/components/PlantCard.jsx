@@ -44,7 +44,7 @@ const PlantCard = (props) => {
                     <img src={plant.imageURLS[0]} width="100%" height="auto" />
                 </Link>
                 <button 
-                    style={{position: "absolute", bottom: "5%", width: "95%", zIndex: "1", right: "2.5%"}}
+                    style={{position: "absolute", bottom: "5%", width: "95%", zIndex: "1", right: "2.5%", color: "white"}}
                     onClick={() => handleAddToCart(plant.id)}
                 >
                     Add To Cart
