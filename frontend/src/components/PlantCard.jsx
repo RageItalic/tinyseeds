@@ -13,11 +13,6 @@ const PlantCard = (props) => {
     const navigate = useNavigate()
 
     const handleAddToCart = (plantId) => {
-        if (!user && !isAuthenticated && !isVerifying) {
-            alert("Log In or Sign up before adding to cart")
-            navigate("/signin")
-        }
-
         //if cart has plant with given id, just update qty and reset specific object on cart
         //else put in a new object
         let plantWithIdIndex = cart.findIndex(plant => plant.id === plantId)
@@ -39,11 +34,6 @@ const PlantCard = (props) => {
             
             //update plant obj in cart to increase qty
             addToCart("UPDATE_INCREMENT_ITEM", cart, {}, plantWithIdIndex)
-
-
-            // let newCart = [...cart]
-            // newCart[plantWithIdIndex]["qty"] += 1
-            // addToCart(newCart)
         }
     }
 

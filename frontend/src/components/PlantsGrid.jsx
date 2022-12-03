@@ -30,7 +30,6 @@ const PlantsGrid = () => {
     useEffect(() => {
         async function getAndSetPlants() {
             const plantsFromDb = await getPlants(db)
-            // console.log("look here", plantsFromDb)
             setPlants(plantsFromDb)
             setLoading(false)
         }
@@ -42,10 +41,11 @@ const PlantsGrid = () => {
     return (
         <div style={{display: "flex", flexDirection: "row", flexWrap: "wrap", gap: "25px", justifyContent: "center"}}>
             {loading 
-            ? <h3>Loading...</h3>
-            : plants.map(plant => (
-                <PlantCard plant={plant} key={plant.id}/>
-            ))}
+                ? <h3>Loading...</h3>
+                : plants.map(plant => (
+                    <PlantCard plant={plant} key={plant.id}/>
+                ))
+            }
         </div>
     )
 }
