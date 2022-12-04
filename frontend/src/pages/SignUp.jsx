@@ -41,9 +41,9 @@ const SignUp = () => {
 
   return (
     <div className={signUpStyles.page}>
-      <div className={signUpStyles.box} id={signUpStyles.flexContainer}>
-        <h1>Register</h1>
-        <p>
+      <div className={signUpStyles.box}>
+        <h1 className={signUpStyles.fixMe}>Register</h1>
+        <p className={signUpStyles.fixMeParagraph}>
           By signing up I agree to the tiny seeds Privacy Policy and Terms of
           Service
         </p>
@@ -53,7 +53,7 @@ const SignUp = () => {
             <input
               id={signUpStyles.input}
               type="text"
-              placeholder="First Name"
+              placeholder="Full Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
@@ -82,8 +82,6 @@ const SignUp = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
-            <br></br>
-            <br />
             <br />
             <br></br>
             <button type="submit" id={signUpStyles.myButton}>

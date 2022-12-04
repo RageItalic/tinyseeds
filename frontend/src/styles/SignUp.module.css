@@ -16,8 +16,16 @@
   text-align: center;
 }
 
+.fixMe {
+  margin-top: 0px;
+}
+
+.fixMeParagraph {
+  font-size: 80%;
+  font-style: normal;
+}
+
 body {
-  /* background-color: #d0d4ca; */
   background-image: url("../assets/pic3.png");
   background-repeat: no-repeat;
   background-position: cover;
@@ -27,7 +35,7 @@ body {
   color: #3f423a;
   font-size: 65%;
   float: left;
-  padding-left: 8%;
+  padding-left: 11%;
 }
 
 #myButton {
