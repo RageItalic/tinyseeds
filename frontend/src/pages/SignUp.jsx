@@ -42,7 +42,7 @@ const SignUp = () => {
   return (
     <div className={signUpStyles.page}>
       <div className={signUpStyles.box} id={signUpStyles.flexContainer}>
-        <h1>Sign Up</h1>
+        <h1>Register</h1>
         <p>
           By signing up I agree to the tiny seeds Privacy Policy and Terms of
           Service
@@ -57,56 +57,33 @@ const SignUp = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
-            <input
-              id={signUpStyles.input}
-              type="text"
-              placeholder="Last Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <br></br>
             <div>
               <h8 id={signUpStyles.underBoxText}>
                 <b>Make sure it matches the name on your government ID</b>
               </h8>
             </div>
-            <br />
             <input
               id={signUpStyles.input}
               type="text"
-              placeholder="Birthdate (mm/dd/yy)"
+              placeholder="Email Address"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
-            <div>
-              <h8 id={signUpStyles.underBoxText}>
-                <b>
-                  To sign up, you need to be at least 18. Your birthday won't be
-                  shared with other people who use tiny seeds
-                </b>
-              </h8>
-            </div>
             <br></br>
-            <input
-              id={signUpStyles.input}
-              type="email"
-              placeholder="Email Address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
             <div>
               <h8 id={signUpStyles.underBoxText}>
                 <b>We'll email you purchase confirmation and receipts</b>
               </h8>
             </div>
-            <br />
             <input
               id={signUpStyles.input}
-              type="password"
+              type="text"
               placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
+            <br></br>
+            <br />
             <br />
             <br></br>
             <button type="submit" id={signUpStyles.myButton}>
