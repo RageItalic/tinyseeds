@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { getOrderHistory } from "../utils/helpers";
 
 const exampleGet = async () => {
   try {
@@ -20,9 +21,7 @@ const examplePost = async () => {
   };
 
   try {
-    let response = await axios.post(
-      "http://localhost:8080/create-checkout-session"
-    );
+    let response = await axios.post("http://localhost:8080/getOrderHistory");
     console.log("look here ", response.data);
     window.location.replace(response.data.url);
   } catch (e) {
@@ -35,8 +34,9 @@ const Examples = () => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    exampleGet();
-    examplePost();
+    // exampleGet();
+    // examplePost();
+    getOrderHistory("fvc63b");
   }, []);
 
   return (
