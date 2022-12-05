@@ -7,13 +7,6 @@ import {
   equalTo,
 } from "firebase/database";
 
-export const getFakeData = async () => {
-  const response = await axios.get(
-    "https://jsonplaceholder.typicode.com/posts"
-  );
-  return response.data;
-};
-
 export async function getOrderHistory(userId) {
   const db = getDatabase();
   var resu = [];
