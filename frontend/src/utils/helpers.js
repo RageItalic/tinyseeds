@@ -4,6 +4,8 @@ import { getDatabase, get, ref } from "firebase/database";
 export async function getOrderHistory(userId) {
   const db = getDatabase();
   var orders = [];
+  var resu = [];
+
   try {
     const snapshot = await get(ref(db, `/purchaseOrders`));
     if (snapshot.exists()) {
@@ -23,16 +25,16 @@ export async function getOrderHistory(userId) {
     });
   });
 
-  var resu = [];
+  //loop through plants to grab plant object for result
   plantsOrdered.forEach(async (plant) => {
     try {
-      const snapshot = await get(ref(db, `/plants`));
+      const snapshot = await get(ref(db, `/plants`)); //call to db to get all plants
       if (snapshot.exists()) {
+        //get plants which have node is the plant from plants table, plant is the plant from purchaseOrder table
         snapshot.val().filter((node) => {
           if (node.id === plant.productId) {
-            resu.push(node);
-            node["qty"] = plant.qty;
-            resu.push(node);
+            node["qty"] = plant.qty; //add quantity field to object
+            resu.push(node); //add to result array
           }
         });
       }
