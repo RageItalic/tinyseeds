@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { getOrderHistory } from "../utils/helpers";
+import { getOrderHistory, getPlant } from "../utils/helpers";
 
 const exampleGet = async () => {
   try {
@@ -37,6 +37,7 @@ const Examples = () => {
     // exampleGet();
     // examplePost();
     getOrderHistory("fvc63b");
+    getPlant("oldrle");
   }, []);
 
   return (

@@ -45,3 +45,19 @@ export async function getOrderHistory(userId) {
   console.log(resu);
   return orders;
 }
+
+export async function getPlant(pid) {
+  const db = getDatabase();
+  var plant = null;
+
+  try {
+    const snapshot = await get(ref(db, `/plants`));
+    if (snapshot.exists()) {
+      plant = snapshot.val().filter((node) => node.id === pid);
+    }
+  } catch (e) {
+    console.error(e);
+  }
+  console.log(plant);
+  return plant; //plant not found
+}
