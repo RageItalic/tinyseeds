@@ -1,6 +1,11 @@
 import axios from "axios";
 import { getDatabase, get, ref } from "firebase/database";
 
+/**
+ * Get history from a user
+ * @param {*} userId id of the user
+ * @returns plants and quantity ordered by user with given id
+ */
 export async function getOrderHistory(userId) {
   const db = getDatabase();
   var orders = [];
@@ -46,6 +51,11 @@ export async function getOrderHistory(userId) {
   return orders;
 }
 
+/**
+ * Get a single plant
+ * @param {*} pid id of the plant you want to return
+ * @returns the plant with given pid
+ */
 export async function getPlant(pid) {
   const db = getDatabase();
   var plant = null;
