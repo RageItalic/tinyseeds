@@ -8,9 +8,15 @@ import CartItem from './CartItem'
 const Cart = (props) => {
     const {modalIsOpen, setModalIsOpen} = props
     const cart = useCartStore(state => state.cart)
+    const addToCart = useCartStore(state => state.addToCart)
     const user = useAuthStore(state => state.user)
     const [cartTotal, setCartTotal] = useState("0")
     const navigate = useNavigate()
+
+    function handleEmptyCart() {
+        localStorage.removeItem('cart')
+        addToCart("LOAD_EXISTING_CART", [])
+    }
 
     useEffect(() => {
         let total = 0
@@ -22,7 +28,14 @@ const Cart = (props) => {
         <PureModal
             header={`Your Cart`}
             footer={
-                <div>
+                <div style={{display: "flex", gap: "25px"}}>
+                    <button
+                        disabled={cartTotal === 0}
+                        onClick={() => handleEmptyCart()}
+                        style={cartTotal === 0 ? {background: "grey"} : {}}
+                    >
+                        Empty Cart
+                    </button>
                     <button
                         disabled={cartTotal === 0} 
                         onClick={() => {
@@ -37,7 +50,7 @@ const Cart = (props) => {
             }
             isOpen={modalIsOpen}
             onClose={() => setModalIsOpen(false)}
-            width="400px"
+            width="500px"
             scrollable={true}
             maxHeight={"450px"}
         >

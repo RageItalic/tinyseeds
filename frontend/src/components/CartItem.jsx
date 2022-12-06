@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import useCartStore from '../store/cart'
 
 const CartItem = (props) => {
@@ -5,6 +6,11 @@ const CartItem = (props) => {
     const cart = useCartStore(state => state.cart)
     const addToCart = useCartStore(state => state.addToCart)
     const removeFromCart = useCartStore(state => state.removeFromCart)
+
+    useEffect(() => {
+        //store cart in localStorage every time it updates
+        localStorage.setItem('cart', JSON.stringify(cart))
+    }, [cart])
 
     return (
         <div key={item.id} style={{display: "flex", flexDirection: "row", gap: "20px"}}>

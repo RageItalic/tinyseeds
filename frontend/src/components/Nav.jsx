@@ -15,7 +15,6 @@ const Nav = () => {
     const setUser = useAuthStore(state => state.setUser)
     const cart = useCartStore(state => state.cart)
     const addToCart = useCartStore(state => state.addToCart)
-    const removeFromCart = useCartStore(state => state.removeFromCart)
     const {isAuthenticated, isVerifying} = useAuth()
     const [modalIsOpen, setModalIsOpen] = useState(false)
 
@@ -31,11 +30,6 @@ const Nav = () => {
             console.log(eCode, eMessage)
             alert("Logout failed. Try again.")
         }
-    }
-
-    function handleEmptyCart() {
-        localStorage.removeItem('cart')
-        addToCart("LOAD_EXISTING_CART", [])
     }
 
     useEffect(() => {
@@ -70,8 +64,7 @@ const Nav = () => {
             <br />
             <Link to="/examples">Examples</Link>
             <br />
-            <p onClick={() => setModalIsOpen(true)}>View Cart ({cart.length} items)</p>
-            <p onClick={() => handleEmptyCart()}>Click to empty cart</p>
+            <a onClick={() => setModalIsOpen(true)}>View Cart ({cart.length} items)</a>
         </nav>
     )
 }
