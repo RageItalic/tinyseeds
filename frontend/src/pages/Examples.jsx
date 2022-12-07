@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { getOrderHistory, getPlant } from "../utils/helpers";
 
 const exampleGet = async () => {
   try {
@@ -20,9 +21,7 @@ const examplePost = async () => {
   };
 
   try {
-    let response = await axios.post(
-      "http://localhost:8080/create-checkout-session"
-    );
+    let response = await axios.post("http://localhost:8080/getOrderHistory");
     console.log("look here ", response.data);
     window.location.replace(response.data.url);
   } catch (e) {
@@ -33,10 +32,18 @@ const examplePost = async () => {
 
 const Examples = () => {
   const [count, setCount] = useState(0);
+  const testReview = {
+    date: "2017-09-20T06:45:16 +04:00",
+    description:
+      "sunt commodo nostrud irure nostrud voluptate culpa nostrud aliqua laboris laboris incididunt do nisi dolore fugiat elit nisi pariatur duis laboris et Lorem enim exercitation aliqua do mollit nisi ea in in veniam et proident labore cupidatat enim fugiat Lorem",
+    id: "638ade624068c0e123456789",
+  };
 
   useEffect(() => {
-    exampleGet();
-    examplePost();
+    // exampleGet();
+    // examplePost();
+    getOrderHistory("fvc63b");
+    getPlant("oldrle");
   }, []);
 
   return (
