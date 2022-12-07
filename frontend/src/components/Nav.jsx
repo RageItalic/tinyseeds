@@ -1,22 +1,29 @@
 import { signOut } from "firebase/auth"
-import { child, getDatabase, ref, get, set } from "firebase/database"
 import { useState, useEffect } from "react"
-import { Link, redirect } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import PureModal from 'react-pure-modal';
+import 'react-pure-modal/dist/react-pure-modal.min.css';
 import { useAuth } from "../hooks/useAuth"
 import useAuthStore from "../store/auth"
+import useCartStore from "../store/cart"
 import { auth } from "../utils/firebase"
+import Cart from "./Cart";
 
 const Nav = () => {
+    const navigate = useNavigate()
     const user = useAuthStore(state => state.user)
     const setUser = useAuthStore(state => state.setUser)
-    const {isAuthenticated, isVeryifying} = useAuth()
+    const cart = useCartStore(state => state.cart)
+    const addToCart = useCartStore(state => state.addToCart)
+    const {isAuthenticated, isVerifying} = useAuth()
+    const [modalIsOpen, setModalIsOpen] = useState(false)
 
     async function handleUserSignOut() {
         try {
             console.log("signing out")
             await signOut(auth)
             setUser(null)
-            redirect("/")
+            navigate("/")
         } catch (e) {
             const eCode = e.code;
             const eMessage = e.message;
@@ -25,9 +32,20 @@ const Nav = () => {
         }
     }
 
+    useEffect(() => {
+        // get cart from localstorage on page refresh
+        if (cart.length === 0) {
+            let newCart = JSON.parse(localStorage.getItem('cart'))
+            newCart !== null
+                ? addToCart("LOAD_EXISTING_CART", newCart)
+                : addToCart("LOAD_EXISTING_CART", [])
+        }
+    }, [])
+
     return (
         <nav>
-            {isVeryifying && <p>loading...</p>}
+            <Cart modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen}  />
+            {isVerifying && <p>loading...</p>}
             {user && isAuthenticated
             ?   <>
                     <p>Logged in as {user.displayName ?? user.email}</p>
@@ -45,6 +63,8 @@ const Nav = () => {
             <Link to="/plants/1">Individual Plant</Link>
             <br />
             <Link to="/examples">Examples</Link>
+            <br />
+            <a onClick={() => setModalIsOpen(true)}>View Cart ({cart.length} items)</a>
         </nav>
     )
 }
