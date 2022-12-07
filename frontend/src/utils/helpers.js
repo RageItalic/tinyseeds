@@ -9,8 +9,9 @@ import { getDatabase, get, ref } from "firebase/database";
 export async function getOrderHistory(userId) {
   const db = getDatabase();
   var orders = [];
-  var resu = [];
+  var result = [];
 
+  //retrieve buyer
   try {
     const snapshot = await get(ref(db, `/purchaseOrders`));
     if (snapshot.exists()) {
@@ -39,7 +40,7 @@ export async function getOrderHistory(userId) {
         snapshot.val().filter((node) => {
           if (node.id === plant.productId) {
             node["qty"] = plant.qty; //add quantity field to object
-            resu.push(node); //add to result array
+            result.push(node); //add to result array
           }
         });
       }
@@ -47,7 +48,7 @@ export async function getOrderHistory(userId) {
       console.error(e);
     }
   });
-  console.log(resu);
+  console.log(result);
   return orders;
 }
 

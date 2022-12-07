@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { getOrderHistory, getPlant } from "../utils/helpers";
+import { getOrderHistory, getPlant, addReview } from "../utils/helpers";
 
 const exampleGet = async () => {
   try {
@@ -32,6 +32,12 @@ const examplePost = async () => {
 
 const Examples = () => {
   const [count, setCount] = useState(0);
+  const testReview = {
+    date: "2017-09-20T06:45:16 +04:00",
+    description:
+      "sunt commodo nostrud irure nostrud voluptate culpa nostrud aliqua laboris laboris incididunt do nisi dolore fugiat elit nisi pariatur duis laboris et Lorem enim exercitation aliqua do mollit nisi ea in in veniam et proident labore cupidatat enim fugiat Lorem",
+    id: "638ade624068c0e123456789",
+  };
 
   useEffect(() => {
     // exampleGet();
