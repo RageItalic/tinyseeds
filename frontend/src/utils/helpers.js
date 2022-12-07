@@ -2,14 +2,16 @@ import axios from "axios";
 import { getDatabase, get, ref } from "firebase/database";
 
 /**
- * Get history from a user
+ * Returns an array of purchaseOrder objects. These objects have updated
+ * productsBought variable which have modified plant objects in them. They are
+ * basically plant objects but with an added qty variable which shows how many
+ * of those items were ordered.
  * @param {*} userId id of the user
  * @returns plants and quantity ordered by user with given id
  */
 export async function getOrderHistory(userId) {
   const db = getDatabase();
   var orders = [];
-  var result = [];
 
   //retrieve buyer
   try {
@@ -23,32 +25,35 @@ export async function getOrderHistory(userId) {
     console.error(e);
   }
 
-  //compile all plants ordered by user into an array
-  var plantsOrdered = [];
   orders.forEach((element) => {
+    var plantsOrdered = [];
+    var plants = [];
+
     element.productsBought.forEach((plant) => {
       plantsOrdered.push(plant);
     });
-  });
 
-  //loop through plants to grab plant object for result
-  plantsOrdered.forEach(async (plant) => {
-    try {
-      const snapshot = await get(ref(db, `/plants`)); //call to db to get all plants
-      if (snapshot.exists()) {
-        //get plants which have node is the plant from plants table, plant is the plant from purchaseOrder table
-        snapshot.val().filter((node) => {
-          if (node.id === plant.productId) {
-            node["qty"] = plant.qty; //add quantity field to object
-            result.push(node); //add to result array
-          }
-        });
+    //create plant objects with qty variable
+    plantsOrdered.forEach(async (plantOrder) => {
+      try {
+        const snapshot = await get(ref(db, `/plants`)); //call to db to get all plants
+        if (snapshot.exists()) {
+          //get plants which have node is the plant from plants table, plant is the plant from purchaseOrder table
+          snapshot.val().filter((plant) => {
+            if (plant.id === plantOrder.productId) {
+              plant["qty"] = plantOrder.qty; //add quantity field to object
+              plants.push(plant); //add to result array
+            }
+          });
+        }
+      } catch (e) {
+        console.error(e);
       }
-    } catch (e) {
-      console.error(e);
-    }
+    });
+
+    element.productsBought = plants;
   });
-  console.log(result);
+  console.log(orders);
   return orders;
 }
 
@@ -69,6 +74,5 @@ export async function getPlant(pid) {
   } catch (e) {
     console.error(e);
   }
-  console.log(plant);
   return plant; //plant not found
 }
