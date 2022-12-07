@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { getOrderHistory, getPlant, addReview } from "../utils/helpers";
+import { getOrderHistory, getPlant } from "../utils/helpers";
 
 const exampleGet = async () => {
   try {
