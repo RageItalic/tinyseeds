@@ -49,6 +49,11 @@ const Checkout = () => {
 
             //call helper function here to store purchase order in purchase order node
 
+
+            //empty cart after payment 
+            localStorage.removeItem('cart')
+            addToCart("LOAD_EXISTING_CART", [])
+
             localStorage.setItem("checkoutAttempt", checkoutAttempt + 1)
             navigate("/checkout/success")
         } else {
@@ -57,9 +62,7 @@ const Checkout = () => {
             navigate("/checkout/error")
         }
 
-        //empty cart after payment (need to ask prof if we need to empty only on successful checkout or in case of error as well as here)
-        localStorage.removeItem('cart')
-        addToCart("LOAD_EXISTING_CART", [])
+        
     }
 
     const handleZipCodeInput = (e) => {
