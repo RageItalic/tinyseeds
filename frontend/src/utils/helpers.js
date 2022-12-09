@@ -7,7 +7,7 @@ import { getDatabase, get, ref } from "firebase/database";
  * basically plant objects but with an added qty variable which shows how many
  * of those items were ordered.
  * @param {*} userId id of the user
- * @returns plants and quantity ordered by user with given id
+ * @returns Order object containing plants and
  */
 export async function getOrderHistory(userId) {
   const db = getDatabase();
@@ -15,9 +15,15 @@ export async function getOrderHistory(userId) {
 
   //retrieve buyer
   try {
-    const snapshot = await get(ref(db, `/purchaseOrders`));
+    //find buyer with id = userId
+    const snapshot = await get(ref(db, `/purchaseOrders`)); //O(n)
     if (snapshot.exists()) {
-      orders = snapshot.val().filter((node) => node.buyerID === userId);
+      snapshot.forEach((child) => {
+        //check if buyer is the same, if yes add order to orders array
+        if (child.val().buyerID == userId) {
+          orders.push(child.val());
+        }
+      });
     } else {
       console.log("no data found");
     }
@@ -25,54 +31,46 @@ export async function getOrderHistory(userId) {
     console.error(e);
   }
 
-  orders.forEach((element) => {
+  //process orders by converting productsBought array into modified plant objects
+  orders.forEach((order) => {
     var plantsOrdered = [];
-    var plants = [];
+    var plantOrders = Object.values(order.productsBought); //retrieves the productsBought map and converts into an array so we can use foreach()
 
-    element.productsBought.forEach((plant) => {
-      plantsOrdered.push(plant);
-    });
-
-    //create plant objects with qty variable
-    plantsOrdered.forEach(async (plantOrder) => {
+    plantOrders.forEach(async (plantOrder) => {
       try {
-        const snapshot = await get(ref(db, `/plants`)); //call to db to get all plants
-        if (snapshot.exists()) {
-          //get plants which have node is the plant from plants table, plant is the plant from purchaseOrder table
-          snapshot.val().filter((plant) => {
-            if (plant.id === plantOrder.productId) {
-              plant["qty"] = plantOrder.qty; //add quantity field to object
-              plants.push(plant); //add to result array
-            }
-          });
-        }
+        const snapshot = await get(ref(db, `/plants/${plantOrder.productId}`)); //get all plants with given plant id O(1)
+        var plant = snapshot.val();
+        plant["qty"] = plantOrder.qty;
+        plantsOrdered.push(plant);
       } catch (e) {
         console.error(e);
       }
     });
 
-    element.productsBought = plants;
+    order.productsBought = plantsOrdered;
   });
-  console.log(orders);
   return orders;
 }
 
 /**
  * Get a single plant
  * @param {*} pid id of the plant you want to return
- * @returns the plant with given pid
+ * @returns The plant with given pid, or null if it doesn't exist
  */
 export async function getPlant(pid) {
   const db = getDatabase();
   var plant = null;
 
   try {
-    const snapshot = await get(ref(db, `/plants`));
+    const snapshot = await get(ref(db, `/plants/${pid}`)); //O(1)
     if (snapshot.exists()) {
-      plant = snapshot.val().filter((node) => node.id === pid);
+      plant = snapshot.val();
+    } else {
+      console.log("Plant does not exist!");
     }
   } catch (e) {
     console.error(e);
   }
-  return plant; //plant not found
+
+  return plant;
 }
