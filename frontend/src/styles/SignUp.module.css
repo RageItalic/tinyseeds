@@ -1,6 +1,8 @@
 .page {
   background-color: #d0d4ca;
-
+  background-image: url("../assets/pic3.png");
+  background-repeat: no-repeat;
+  background-position: cover;
   color: #3f423a;
 }
 
@@ -26,9 +28,9 @@
 }
 
 body {
-  background-image: url("../assets/pic3.png");
+  /* background-image: url("../assets/pic3.png");
   background-repeat: no-repeat;
-  background-position: cover;
+  background-position: cover; */
 }
 
 #underBoxText {

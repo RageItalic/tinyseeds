@@ -55,7 +55,7 @@
 }
 
 /* container for the img */
-.pic_container,img{
+.pic_container > img{
     display: flex;
     padding: 40px;
     /* position: relative; */
@@ -69,7 +69,7 @@
 
 /* ----------------------------------------------FORM STYLING---------------------------------------------- */
 
-.form,h1{
+.form > h1{
     color: #39442f;
     font-style:normal;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
@@ -82,7 +82,7 @@
     margin-top: 30%;
 }
 
-.form,p{
+.form > p{
     color: #39442f;
     font-style: italic;
     font-size: 28px;
@@ -93,7 +93,7 @@
     text-align: center;
 }
 
-.email,h4{
+.email > h4{
     color: #39442f;
     font-size: 20px;
     font-style: bold;
