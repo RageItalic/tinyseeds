@@ -14,7 +14,7 @@ const getPlants = async (db) => {
             console.log(snapshot.val())
             return snapshot.val()
         } else {
-            consoe.log("no plants found")
+            console.log("no plants found")
         }
     } catch (e) {
         console.error("gettting plants failed", e)
@@ -39,6 +39,7 @@ const PlantsGrid = () => {
 
     
     return (
+       
         <div style={{display: "flex", flexDirection: "row", flexWrap: "wrap", gap: "25px", justifyContent: "center"}}>
             {loading 
                 ? <h3>Loading...</h3>
