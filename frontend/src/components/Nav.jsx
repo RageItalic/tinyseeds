@@ -5,13 +5,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import useAuthStore from "../store/auth";
 import { auth } from "../utils/firebase";
-import navStyles from "../styles/nav.module.css";
 
 const Nav = () => {
   const navigate = useNavigate();
   const user = useAuthStore((state) => state.user);
   const setUser = useAuthStore((state) => state.setUser);
+  const cart = useCartStore((state) => state.cart);
+  const addToCart = useCartStore((state) => state.addToCart);
   const { isAuthenticated, isVerifying } = useAuth();
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   async function handleUserSignOut() {
     try {
@@ -37,29 +39,17 @@ const Nav = () => {
         </>
       ) : (
         <>
-          <ul className={navStyles.list}>
-            <li id={navStyles.li}>
-              <Link to="/signup">Register</Link>
-            </li>
-            <li id={navStyles.li}>
-              <Link to="/signin">Sign in</Link>
-            </li>
-          </ul>
+          <Link to="/signup">Sign up</Link>
+          <br />
+          <Link to="/signin">Sign in</Link>
         </>
       )}
       <br />
-      <ul>
-        <li id={navStyles.li}>
-          <Link to="/plants"> All Plants</Link>
-        </li>
-        <li id={navStyles.li}>
-          <Link to="/plants/1">Individual Plant</Link>
-        </li>
-        <li id={navStyles.li}>
-          <Link to="/examples">Examples</Link>
-        </li>
-      </ul>
+      <Link to="/plants">All Plants</Link>
+      <br />
+      <Link to="/plants/1">Individual Plant</Link>
+      <br />
+      <Link to="/examples">Examples</Link>
     </nav>
   );
 };
-export default Nav;
