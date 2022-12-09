@@ -1,5 +1,4 @@
-import axios from "axios";
-import { getDatabase, get, ref } from "firebase/database";
+import { getDatabase, get, ref, child, set } from "firebase/database";
 
 /**
  * Returns an array of purchaseOrder objects. These objects have updated
@@ -72,4 +71,55 @@ export async function getPlant(pid) {
     console.error(e);
   }
   return plant;
+}
+
+/**
+ * Save a purchase order in the database
+ * @param {} purchaseOrder The order
+ * Here is an example purchaseOrder object
+const testPurchaseOrder = {
+    id: orderId,
+    value: {
+      id: orderId,
+      buyerID: "fvc63b",
+      date: "2025-02-24T07:39:45",
+      productsBought: {
+        [purchaseId]: {
+          id: purchaseId,
+          productId: "kz8i5h",
+          qty: "1",
+        },
+      },
+      status: "FAILURE",
+    },
+  };
+ */
+export function saveOrder(purchaseOrder) {
+  const db = getDatabase();
+
+  set(ref(db, `/purchaseOrders/${purchaseOrder.id}`), purchaseOrder.value);
+}
+
+/**
+ * Add a review to single plant
+ * @param {*} review Review object
+ * Here is an example review object
+ *  const testReview = {
+    id: reviewId,
+    value: {
+      date: "2017-09-20T06:45:16 +04:00",
+      description:
+        "sunt commodo nostrud irure nostrud voluptate culpa nostrud aliqua laboris laboris incididunt do nisi dolore fugiat elit nisi pariatur duis laboris et Lorem enim exercitation aliqua do mollit nisi ea in in veniam et proident labore cupidatat enim fugiat Lorem",
+      id: reviewId,
+      index: "3",
+      ratingOutOf5: "2.5",
+      title: "look at this",
+    },
+  };
+ * @param {*} pid Plant id
+ */
+export function addReview(review, pid) {
+  const db = getDatabase();
+
+  set(ref(db, `/plants/${pid}/reviews/${review.id}`), review.value);
 }
