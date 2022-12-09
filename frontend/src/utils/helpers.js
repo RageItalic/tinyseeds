@@ -33,13 +33,13 @@ export async function getOrderHistory(userId) {
 
   //process orders by converting productsBought array into modified plant objects
   orders.forEach((order) => {
-    var plantsOrdered = [];
-    var plantOrders = Object.values(order.productsBought); //retrieves the productsBought map and converts into an array so we can use foreach()
+    let plantsOrdered = [];
+    let plantOrders = Object.values(order.productsBought); //retrieves the productsBought map and converts into an array so we can use foreach()
 
     plantOrders.forEach(async (plantOrder) => {
       try {
         const snapshot = await get(ref(db, `/plants/${plantOrder.productId}`)); //get all plants with given plant id O(1)
-        var plant = snapshot.val();
+        let plant = snapshot.val();
         plant["qty"] = plantOrder.qty;
         plantsOrdered.push(plant);
       } catch (e) {
@@ -59,7 +59,7 @@ export async function getOrderHistory(userId) {
  */
 export async function getPlant(pid) {
   const db = getDatabase();
-  var plant = null;
+  let plant = null;
 
   try {
     const snapshot = await get(ref(db, `/plants/${pid}`)); //O(1)
@@ -71,6 +71,5 @@ export async function getPlant(pid) {
   } catch (e) {
     console.error(e);
   }
-
   return plant;
 }

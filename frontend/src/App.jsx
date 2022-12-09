@@ -9,6 +9,7 @@ import NotFound from "./pages/NotFound";
 import Nav from "./components/Nav";
 import CheckoutSuccess from "./pages/CheckoutSuccess";
 import CheckoutError from "./pages/CheckoutError";
+import Checkout from "./pages/Checkout";
 
 function App() {
   return (

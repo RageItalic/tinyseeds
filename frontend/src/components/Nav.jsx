@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import useAuthStore from "../store/auth";
 import { auth } from "../utils/firebase";
+import useCartStore from "../store/cart";
 
 const Nav = () => {
   const navigate = useNavigate();
@@ -53,3 +54,5 @@ const Nav = () => {
     </nav>
   );
 };
+
+export default Nav;
