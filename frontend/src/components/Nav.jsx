@@ -44,24 +44,21 @@ const Nav = () => {
             <li id={navStyles.li}>
               <Link to="/signin">Sign in</Link>
             </li>
-            <li id={navStyles.li}>
-              <Link to="/plants"> All Plants</Link>
-            </li>
-            <li id={navStyles.li}>
-              <Link to="/plants/1">Individual Plant</Link>
-            </li>
-            <li id={navStyles.li}>
-              <Link to="/examples">Examples</Link>
-            </li>
           </ul>
         </>
       )}
       <br />
-      <Link to="/plants">All Plants</Link>
-      <br />
-      <Link to="/plants/1">Individual Plant</Link>
-      <br />
-      <Link to="/examples">Examples</Link>
+      <ul>
+        <li id={navStyles.li}>
+          <Link to="/plants"> All Plants</Link>
+        </li>
+        <li id={navStyles.li}>
+          <Link to="/plants/1">Individual Plant</Link>
+        </li>
+        <li id={navStyles.li}>
+          <Link to="/examples">Examples</Link>
+        </li>
+      </ul>
     </nav>
   );
 };
