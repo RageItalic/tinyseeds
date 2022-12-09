@@ -2,20 +2,28 @@ import axios from "axios";
 import { getDatabase, get, ref } from "firebase/database";
 
 /**
- * Get history from a user
+ * Returns an array of purchaseOrder objects. These objects have updated
+ * productsBought variable which have modified plant objects in them. They are
+ * basically plant objects but with an added qty variable which shows how many
+ * of those items were ordered.
  * @param {*} userId id of the user
- * @returns plants and quantity ordered by user with given id
+ * @returns Order object containing plants and
  */
 export async function getOrderHistory(userId) {
   const db = getDatabase();
   var orders = [];
-  var result = [];
 
   //retrieve buyer
   try {
-    const snapshot = await get(ref(db, `/purchaseOrders`));
+    //find buyer with id = userId
+    const snapshot = await get(ref(db, `/purchaseOrders`)); //O(n)
     if (snapshot.exists()) {
-      orders = snapshot.val().filter((node) => node.buyerID === userId);
+      snapshot.forEach((child) => {
+        //check if buyer is the same, if yes add order to orders array
+        if (child.val().buyerID == userId) {
+          orders.push(child.val());
+        }
+      });
     } else {
       console.log("no data found");
     }
@@ -23,52 +31,45 @@ export async function getOrderHistory(userId) {
     console.error(e);
   }
 
-  //compile all plants ordered by user into an array
-  var plantsOrdered = [];
-  orders.forEach((element) => {
-    element.productsBought.forEach((plant) => {
-      plantsOrdered.push(plant);
-    });
-  });
+  //process orders by converting productsBought array into modified plant objects
+  orders.forEach((order) => {
+    let plantsOrdered = [];
+    let plantOrders = Object.values(order.productsBought); //retrieves the productsBought map and converts into an array so we can use foreach()
 
-  //loop through plants to grab plant object for result
-  plantsOrdered.forEach(async (plant) => {
-    try {
-      const snapshot = await get(ref(db, `/plants`)); //call to db to get all plants
-      if (snapshot.exists()) {
-        //get plants which have node is the plant from plants table, plant is the plant from purchaseOrder table
-        snapshot.val().filter((node) => {
-          if (node.id === plant.productId) {
-            node["qty"] = plant.qty; //add quantity field to object
-            result.push(node); //add to result array
-          }
-        });
+    plantOrders.forEach(async (plantOrder) => {
+      try {
+        const snapshot = await get(ref(db, `/plants/${plantOrder.productId}`)); //get all plants with given plant id O(1)
+        let plant = snapshot.val();
+        plant["qty"] = plantOrder.qty;
+        plantsOrdered.push(plant);
+      } catch (e) {
+        console.error(e);
       }
-    } catch (e) {
-      console.error(e);
-    }
+    });
+
+    order.productsBought = plantsOrdered;
   });
-  console.log(result);
   return orders;
 }
 
 /**
  * Get a single plant
  * @param {*} pid id of the plant you want to return
- * @returns the plant with given pid
+ * @returns The plant with given pid, or null if it doesn't exist
  */
 export async function getPlant(pid) {
   const db = getDatabase();
-  var plant = null;
+  let plant = null;
 
   try {
-    const snapshot = await get(ref(db, `/plants`));
+    const snapshot = await get(ref(db, `/plants/${pid}`)); //O(1)
     if (snapshot.exists()) {
-      plant = snapshot.val().filter((node) => node.id === pid);
+      plant = snapshot.val();
+    } else {
+      console.log("Plant does not exist!");
     }
   } catch (e) {
     console.error(e);
   }
-  console.log(plant);
-  return plant; //plant not found
+  return plant;
 }
