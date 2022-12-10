@@ -18,7 +18,7 @@ const CheckoutError = () => {
                     <p>Your order has not been placed. Try again.</p>
                 </div>
             </div>
-        </div>
+         </div>
     )
 }
 
