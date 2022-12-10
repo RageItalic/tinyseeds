@@ -6,28 +6,6 @@ import styles from '../styles/checkoutSuccess.module.css'
 
 
 const CheckoutSuccess = () => {
-    const user = useAuthStore(state => state.user)
-    const {isAuthenticated, isVerifying} = useAuth()
-    const navigate = useNavigate()
-
-    useEffect(() => {
-        //redirect person to sign in page if not signed in
-        console.log("user?", user, isVerifying)
-        if (!isAuthenticated && !isVerifying) {
-            console.log('does this poop?')
-            navigate("/signin")        
-        }
-
-    }, [isAuthenticated, isVerifying])
-
-    if (isVerifying) {
-        return (
-            <div>
-                <h1>Loading...</h1>
-            </div>
-        )
-    };
-
     return (
         <div className={styles.container}>
             <div className={styles.CheckoutWrapper}>
