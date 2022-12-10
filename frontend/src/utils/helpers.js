@@ -138,7 +138,7 @@ export async function getUser(uid) {
     if (snapshot.exists()) {
       user = snapshot.val();
     } else {
-      console.log("Plant does not exist!");
+      console.log("User does not exist!");
     }
   } catch (e) {
     console.error(e);
