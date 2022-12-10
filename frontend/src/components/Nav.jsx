@@ -6,7 +6,6 @@ import { useAuth } from "../hooks/useAuth";
 import useAuthStore from "../store/auth";
 import useCartStore from "../store/cart";
 import { auth } from "../utils/firebase";
-import useCartStore from "../store/cart";
 
 const Nav = () => {
   const navigate = useNavigate();
