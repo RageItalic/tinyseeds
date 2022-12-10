@@ -1,0 +1,48 @@
+.container {
+    background-color: #d0d4ca;
+    width: 100%;
+    /* background-color: red; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* height: 100vh; */
+}
+
+.CheckoutWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1{
+    text-align: center;
+    display: flex;
+}
+
+.h1_container{
+    color: #39442f;
+    font-style:normal;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
+    color:rgb(57,68,47);
+}
+
+
+p{
+    text-align: center;
+    width: 20rem;
+}
+
+
+.p_container{
+    display: flex;
+    font-style: italic;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    /* background-color: rgb(57,68,47); */
+    color: rgb(57, 68, 47);
+}
+
+.pic_container img {
+    height: 60px;
+    width: 60px;
+}
