@@ -1,5 +1,13 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect,useRef } from "react"
 import { useParams } from "react-router-dom"
+import styles from "../styles/individualplants.module.css"
+//import axios from "axios"
+// import Accordion from "../components/Accordian";
+import { getPlant } from "../utils/helpers";
+import "../styles/individualplants.css";
+import useCartStore from "../store/cart";
+
+
 
 const IndividualPlant = () => {
     const params = useParams()
@@ -38,9 +46,9 @@ const IndividualPlant = () => {
   useEffect(() => {
     async function getFromDb () {
             let plants = await getPlant(params.plantID)
-            console.log("TESTING", plant)
+            console.log("TESTING", plants)
             setLoading(false)
-            setPlant(plants[0])
+            setPlant(plants)
         }
         getFromDb()
   }, []);
@@ -127,7 +135,7 @@ const IndividualPlant = () => {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default IndividualPlant
