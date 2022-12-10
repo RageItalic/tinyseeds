@@ -123,3 +123,26 @@ export function addReview(review, pid) {
 
   set(ref(db, `/plants/${pid}/reviews/${review.id}`), review.value);
 }
+
+/**
+ * Get a specific user
+ * @param {} uid Id of the user
+ * @returns User with id
+ */
+export async function getUser(uid) {
+  const db = getDatabase();
+  let user = null;
+
+  try {
+    const snapshot = await get(ref(db, `/users/${uid}`)); //O(1)
+    if (snapshot.exists()) {
+      user = snapshot.val();
+    } else {
+      console.log("User does not exist!");
+    }
+  } catch (e) {
+    console.error(e);
+  }
+  console.log(user);
+  return user;
+}
