@@ -6,6 +6,7 @@ import {
   getPlant,
   addReview,
   saveOrder,
+  getUser,
 } from "../utils/helpers";
 
 const exampleGet = async () => {
@@ -80,6 +81,7 @@ const Examples = () => {
     // getPlant("oldrle");
     // addReview(testReview, "oldrle"); //DO NOT UNCOMMENT UNLESS YOUR NAME IS PAUL OR PARTH
     // saveOrder(testPurchaseOrder);  //DO NOT UNCOMMENT UNLESS YOUR NAME IS PAUL OR PARTH
+    getUser("lumcva");
   }, []);
 
   return (
