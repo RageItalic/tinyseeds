@@ -27,7 +27,7 @@ import styles from "../styles/individualplants.module.css"
                 <div className={styles.w_richtext}>
                     <strong>Plant Care</strong>
                     <p>{description.shipping.description}</p>
-                    <strong>Plant Care</strong>
+                    <strong>Sad Plant Signs</strong>
                     <p>{description.shipping.description}</p>
                 </div>
                
@@ -43,3 +43,5 @@ import styles from "../styles/individualplants.module.css"
 };
 
 export default CareGuideAccordion;
+
+

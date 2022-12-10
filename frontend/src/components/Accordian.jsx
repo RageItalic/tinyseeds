@@ -2,43 +2,46 @@ import React, { useState } from 'react';
 
 
 import styles from "../styles/individualplants.module.css"
-const Accordion = ({ title, content }) => {
+const Accordion = ({ description }) => {
   const [isActive, setIsActive] = useState(false);
 
   return (
-    <div className={styles.top_margin}>
-        <div className={styles.accordion}>
-            <div className={styles.accordion_trigger} onClick={() => setIsActive(!isActive)}>
-                
-                {isActive ? 
-                <div className={styles.open_close_item}>
-                    <img src="https://assets.website-files.com/62d2e266e20c184da5836dab/62d5f154aff6ae56f2925175_Arrow-d.svg" width={17} alt="" className={styles.product_arrow} />
-                </div>
-                : <img src="https://assets.website-files.com/62d2e266e20c184da5836dab/62d5f154aff6ae56f2925175_Arrow-d.svg"  width={17} alt="" className={styles.product_arrow} />}
-                <div className={styles._100_percent_width}>
-                    <div className={styles.flex_no_wrap}>
-                        <h6 className={`${styles.h6} ${styles.less_top_margin}`}>&nbsp;&nbsp;{title}<br /></h6>
-                    </div>
-                    </div>
-                </div>
-                <a href="#" className={`${styles.accordion_trigger} ${styles.w_inline_block}`} />
-                    <div className={styles.description} style={{}}> 
-                    {isActive && <p>{content}</p> }
-                    </div>
-                <div className="accordion-item">
-                <div className="accordion-title" onClick={() => setIsActive(!isActive)}>
-                {/* <div>{title}</div> */}
-                {/* <div>{isActive ? '-' : '+'}</div> */}
-                </div>
-                {/* {isActive && <div className="accordion-content">{content}</div>} */}
-            </div>
-            </div>
+    <div className={styles.accordion}>
+    <div className={styles._100_percent_width}>
+        <div
+        className={styles.flex_no_wrap}
+        onClick={() => setIsActive(!isActive)}
+        >
+        <h6 className={`${styles.h6} ${styles.less_top_margin}`}>Shipping</h6>
+        <div className={`${styles.accordion_trigger} ${styles.w_inline_block}`}>{isActive ? '-' : '+'}</div>
+        </div>
+        {isActive && 
+        // <div className="description">
+        //     {description.description}
+        //     </div>
+        <div 
+        // style="width: 630px;" 
+        className={styles.accordion_item}>
+            <div className={styles.w_richtext}>
+            <p>{description.shipping.description}</p>
+                <strong>Weight(Oz)</strong>
+                <p>{description.shipping.weight}</p>
+                <strong>Height(In)</strong>
+                <p>{description.shipping.height}</p>
+                <strong>Length(In)</strong>
+                <p>{description.shipping.length}</p>
             </div>
            
-
+        </div>
+            }
+    </div>
+</div>
+       
 
   
   );
 };
 
 export default Accordion;
+
+
