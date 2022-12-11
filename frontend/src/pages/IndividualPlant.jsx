@@ -3,6 +3,7 @@ import styles from "../styles/individualplants.module.css"
 import { useParams } from "react-router-dom"
 import { useState, useEffect } from 'react'
 import { getPlant } from "../utils/helpers";
+import useCartStore from "../store/cart";
 
 const IndividualPlant = () => {
   const params = useParams()
@@ -14,6 +15,41 @@ const IndividualPlant = () => {
   const [isActive, setIsActive] = useState(null);
   const [careguideisActive, setcareguideIsActive] = useState(null);
   const [shippingisActive, setshippingIsActive] = useState(null);
+  const addToCart = useCartStore(state => state.addToCart)
+  const cart = useCartStore(state => state.cart)
+
+  function handleChange(event) {
+    console.log(event.target.value);
+    setQuantity(event.target.value);
+  }
+  
+
+  const handleAddToCart = (plantId,quantity) => {
+    //if cart has plant with given id, just update qty and reset specific object on cart
+    //else put in a new object
+    let plantWithIdIndex = cart.findIndex(plant => plant.id === plantId)
+    console.log("plant found?", plantWithIdIndex)
+
+    if (plantWithIdIndex === -1) {
+        const newItem = {
+            id: plant.id,
+            name: plant.name,
+            price: plant.price,
+            stripePriceId: plant.stripePriceId,
+            mainImg: plant.imageURLS[0],
+            capacityAvailable: plant.capacityAvailable,
+            qty: quantity
+        }
+        console.log(newItem.qty);
+        addToCart("NEW_ITEM", cart, newItem)
+
+    } else {
+        //same plant obj found in cart
+
+        //update plant obj in cart to increase qty
+        addToCart("UPDATE_INCREMENT_ITEM", cart, {}, plantWithIdIndex)
+    }
+}
 
 
   useEffect(() => {
@@ -62,20 +98,20 @@ const IndividualPlant = () => {
             {/* Add to cart */}
             <div style={{ position: 'relative', marginTop: '15px' }}>
               <div>
-                <form className={styles.add_to_form}>
+                {/* <form className={styles.add_to_form}> */}
                   <div className={styles.quantity_input}>
                     <label htmlFor='quantity' className={styles.field_label}>
                       Quantity
                     </label>
-                    <input type="number" pattern="^[0-9]+$" min="1" value="1" className={styles.quantity}>
+                    <input type="number" pattern="^[0-9]+$" min="1" value={quantity} name={quantity} className={styles.quantity} onChange={handleChange}>
                     </input>
 
                   </div>
-                  <input type="submit" className={styles.add_to_cart_button} value="ADD TO CART"></input>
+                  <input type="submit" className={styles.add_to_cart_button} value="ADD TO CART" onClick={() => handleAddToCart(plant.id,quantity)}></input>
                   <div className={styles.center_text_notice}>
                     <div>Free Shipping &amp; Returns in the U.S.</div>
                   </div>
-                </form>
+                {/* </form> */}
               </div>
             </div>
             {/* Description Accordion */}
