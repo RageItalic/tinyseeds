@@ -28,8 +28,8 @@ const Accordion = ({ description }) => {
                 <p>{description.shipping.weight}</p>
                 <strong>Height(In)</strong>
                 <p>{description.shipping.height}</p>
-                <strong>Length(In)</strong>
-                <p>{description.shipping.length}</p>
+                <strong>Width(In)</strong>
+                <p>{description.shipping.width}</p>
             </div>
            
         </div>
