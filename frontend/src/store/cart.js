@@ -39,7 +39,20 @@ const useCartStore = create((set) => ({
                 ...state,
                 cart: [...oldCart]
             }
-        } else {
+        } 
+        else if (type === "UPDATE_QUANTITY_AMOUNT") {
+            let newCart = [...oldCart]
+            newCart[existingPlantIndex].qty < maxCapacity 
+                ? newCart[existingPlantIndex].qty += newItem
+                : newCart[existingPlantIndex].qty = maxCapacity
+
+            return {
+                ...state,
+                cart: newCart
+            }
+
+        }
+        else {
             console.error("Wrong type or no type passed into addToCart method")
             return null
         }
