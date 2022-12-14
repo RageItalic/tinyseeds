@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom'
 import useCartStore from "../store/cart"
 import { addReview, getPlant } from '../utils/helpers'
 import styles from "../styles/individualplants.module.css"
+import ReviewComponent from '../components/ReviewComponent'
 
 const mystyle = {
   // color: "white",
@@ -72,7 +73,7 @@ const IndividualPlant = () => {
     }
   }
 
-  const handleAddReview = (plantId, quantity, description, ratingOutOf5, title) => {
+  const handleAddReview = (reviewId, quantity, description, ratingOutOf5, title) => {
     //if cart has plant with given id, just update qty and reset specific object on cart
     //else put in a new object
     let plantWithIdIndex = cart.findIndex(plant => plant.id === plantId)
@@ -80,9 +81,9 @@ const IndividualPlant = () => {
 
     if (plantWithIdIndex === -1) {
       const testReview = {
-        id: review.id,
+        id: review.reviewId,
         value: {
-          date: "2017-09-20T06:45:16 +04:00",
+          date: new Date(),
           description: description,
           id: reviewId,
           index: index,
@@ -90,7 +91,7 @@ const IndividualPlant = () => {
           title: title,
         },
       };
-      addReview(testReview, plantId)
+      addReview(testReview, reviewId)
     }
   }
 
@@ -229,6 +230,7 @@ const IndividualPlant = () => {
           <div>
             <h1>Reviews</h1>
             
+            <ReviewComponent/>
 
             {
          plant.reviews && Object.keys(plant.reviews).map((key,i) => 
