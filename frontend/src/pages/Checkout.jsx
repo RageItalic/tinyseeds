@@ -4,6 +4,7 @@ import CartItem from "../components/CartItem"
 import useAuthStore from "../store/auth"
 import useCartStore from "../store/cart"
 import { nanoid } from 'nanoid'
+import styles from "../styles/checkout.module.css";
 
 
 
@@ -104,12 +105,11 @@ const Checkout = () => {
     }, [cart, user])
 
     return (
-        <div style={{display: "flex", flexDirection: "row", height: "100vh"}}>
-            
+        <div style={{display: "flex", flexDirection: "row", height: "100vh", backgroundColor: "white"}}>
             {/* left section */}
-            <div style={{display: "flex", flex: "0.5", flexDirection: "column", padding: "20px"}}>
+            <div style={{display: "flex", flex: "0.5", flexDirection: "column", padding: "20px", backgroundColor: "white", overflow: "auto"}}>
                 <div style={{display: "flex", flex: "1", alignItems: "center", flexDirection: "column"}}>
-                    <h3 style={{marginBottom: "0px", color: "gray"}}>Pay Tiny Seeds</h3>
+                    <h3 style={{marginBottom: "0px", color: "gray", alignItems: "center"}}>Pay Tiny Seeds</h3>
                     <h1 style={{marginTop: "0px"}}>$ {cartTotal}</h1>
                     <h4>You are checking out as {user ? user.email : 'guest'}</h4>
                     <div style={{display: "flex", flexDirection: "column", width: "400px", gap: "25px"}}>
@@ -124,7 +124,7 @@ const Checkout = () => {
             </div>
 
             {/* right section */}
-            <div style={{display: "flex", flex: "0.5", boxShadow: "-8px 0px 15px -3px rgba(0,0,0,0.1)", flexDirection: "column", padding: "20px"}}>
+            <div style={{display: "flex", flex: "0.5", boxShadow: "-8px 0px 15px -3px rgba(0,0,0,0.1)", flexDirection: "column", padding: "20px", backgroundColor:"white"}}>
                 <h1>This is the checkout page</h1>
                 <h4 style={{textAlign: "center"}}>Pay with card</h4>
                 <form onSubmit={(e) => handlePayment(e)}>
