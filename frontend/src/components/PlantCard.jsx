@@ -9,16 +9,14 @@ const PlantCard = (props) => {
     const plant = props.plant
     const addToCart = useCartStore(state => state.addToCart)
     const cart = useCartStore(state => state.cart)
-    const {isAuthenticated, isVerifying} = useAuth()
-    const user = useAuthStore(state => state.user)
-    const navigate = useNavigate()
-
+    
     const handleAddToCart = (plantId) => {
         //if cart has plant with given id, just update qty and reset specific object on cart
         //else put in a new object
         let plantWithIdIndex = cart.findIndex(plant => plant.id === plantId)
         console.log("plant found?", plantWithIdIndex)
 
+        //item not found in cart.. therefore, new item added
         if (plantWithIdIndex === -1) {
             const newItem = {
                 id: plant.id,
@@ -32,7 +30,6 @@ const PlantCard = (props) => {
             addToCart("NEW_ITEM", cart, newItem)
         } else {
             //same plant obj found in cart
-            
             //update plant obj in cart to increase qty
             addToCart("UPDATE_INCREMENT_ITEM", cart, {}, plantWithIdIndex)
         }

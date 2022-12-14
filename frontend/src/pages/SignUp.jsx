@@ -2,7 +2,22 @@ import { useState, useEffect } from "react"
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import {auth} from '../utils/firebase'
 import useAuthStore from "../store/auth";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import {nanoid} from 'nanoid'
+import { getDatabase, ref, set } from "firebase/database";
+
+const setUserInDb = (name, email, id) => {
+    const db = getDatabase()
+    const user = {
+        id,
+        name,
+        email,
+        type: "USER"
+    }
+
+    set(ref(db, `/users/${id}`), user)
+
+}
 
 const SignUp = () => {
     const [name, setName] = useState("")
@@ -18,8 +33,9 @@ const SignUp = () => {
             const userCredentials = await createUserWithEmailAndPassword(auth, email, password)
             console.log("look here to see response from sign up method ", userCredentials)
             userCredentials.user.displayName = name
+            setUserInDb(name, email, userCredentials.user.uid)
             setUser(userCredentials.user)
-            navigate("/")
+            navigate("/", { replace: true })
         } catch (e) {
             const eCode = e.code;
             const eMessage = e.message;

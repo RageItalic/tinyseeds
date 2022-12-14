@@ -11,6 +11,8 @@ import Nav from './components/Nav'
 import Checkout from './pages/Checkout'
 import CheckoutSuccess from './pages/CheckoutSuccess'
 import CheckoutError from './pages/CheckoutError'
+// import RequireAdminAuth from './components/RequireAdminAuth'
+import AdminDash from './pages/AdminDash'
 
 
 
@@ -21,6 +23,7 @@ function App() {
     if (checkoutAttempt === null) {
       localStorage.setItem("checkoutAttempt", 0)
     }
+
   }, [])
   
   return (
@@ -36,6 +39,13 @@ function App() {
           <Route path="/checkout" element={<Checkout />}/>
           <Route path="/checkout/success" element={<CheckoutSuccess />} />
           <Route path="/checkout/error" element={<CheckoutError />} />
+          {/* <Route path="/admin" element={
+              <RequireAdminAuth isAuthenticated={isAuthenticated} isVerifying={isVerifying}>
+                <AdminDash user={user}/>
+              </RequireAdminAuth>
+            } 
+          /> */}
+          <Route path="/admin" element={<AdminDash />}/>
           <Route path="*" element={<NotFound />} />
           <Route path="/examples" element={<Examples />} />
         </Routes>

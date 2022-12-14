@@ -55,7 +55,7 @@ const Checkout = () => {
             addToCart("LOAD_EXISTING_CART", [])
 
             localStorage.setItem("checkoutAttempt", checkoutAttempt + 1)
-            navigate("/checkout/success")
+            navigate("/checkout/success", { replace: true })
         } else {
             //failure
             localStorage.setItem("checkoutAttempt", 0)
@@ -90,8 +90,6 @@ const Checkout = () => {
     }
 
     useEffect(() => {
-
-
         let total = 0
         cart.length > 0 && cart.forEach(item => total += Math.round((Number(item.price) * Number(item.qty)) * 100) / 100)
         setCartTotal(total)

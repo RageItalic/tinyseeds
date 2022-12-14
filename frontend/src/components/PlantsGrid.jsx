@@ -12,7 +12,7 @@ const getPlants = async (db) => {
         const snapshot = await get(ref(db, `/plants`))
         if (snapshot.exists()) {
             console.log(snapshot.val())
-            return snapshot.val()
+            return Object.values(snapshot.val())
         } else {
             consoe.log("no plants found")
         }

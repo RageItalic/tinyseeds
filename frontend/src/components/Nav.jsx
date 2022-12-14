@@ -40,7 +40,9 @@ const Nav = () => {
                 ? addToCart("LOAD_EXISTING_CART", newCart)
                 : addToCart("LOAD_EXISTING_CART", [])
         }
-    }, [])
+
+        console.log("isVerifying: ", isVerifying)
+    }, [isVerifying])
 
     return (
         <nav>
@@ -63,6 +65,8 @@ const Nav = () => {
             <Link to="/plants/1">Individual Plant</Link>
             <br />
             <Link to="/examples">Examples</Link>
+            <br />
+            <Link to="/admin">Admin View</Link>
             <br />
             <a onClick={() => setModalIsOpen(true)}>View Cart ({cart.length} items)</a>
         </nav>

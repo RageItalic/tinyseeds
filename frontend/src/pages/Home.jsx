@@ -1,7 +1,11 @@
 import homeStyles from "../styles/home.module.css";
 import img from "../assets/homePic.png";
+import useAuthStore from "../store/auth";
 
 const Home = () => {
+
+  const user = useAuthStore((state) => state.user);
+  console.log("user after being set in state", user)
   return (
     <div className={homeStyles.home}>
       {/* <img src={img} alt="plant pic" id="myImage" /> */}
