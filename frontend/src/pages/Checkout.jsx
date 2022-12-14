@@ -125,8 +125,8 @@ const Checkout = () => {
 
             {/* right section */}
             <div style={{display: "flex", flex: "0.5", boxShadow: "-8px 0px 15px -3px rgba(0,0,0,0.1)", flexDirection: "column", padding: "20px", backgroundColor:"white"}}>
-                <h1>This is the checkout page</h1>
-                <h4 style={{textAlign: "center"}}>Pay with card</h4>
+                <h1>Pay with card</h1>
+                <h4 style={{textAlign: "center"}}>:]</h4>
                 <form onSubmit={(e) => handlePayment(e)}>
                     <div>
                         <label>Email</label>
