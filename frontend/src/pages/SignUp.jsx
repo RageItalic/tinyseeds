@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import {auth} from '../utils/firebase'
+import { auth } from "../utils/firebase";
 import useAuthStore from "../store/auth";
 import { useNavigate } from "react-router-dom";
-import {nanoid} from 'nanoid'
 import { getDatabase, ref, set } from "firebase/database";
+import signUpStyles from "../styles/SignUp.module.css";
 
 const setUserInDb = (name, email, id) => {
     const db = getDatabase()
@@ -19,15 +19,16 @@ const setUserInDb = (name, email, id) => {
 
 }
 
-const SignUp = () => {
-    const [name, setName] = useState("")
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const setUser = useAuthStore(state => state.setUser)
-    const navigate = useNavigate()
 
-    const handleSubmit = async (event) => {
-        event.preventDefault()
+const SignUp = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const setUser = useAuthStore((state) => state.setUser);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
         try {
             const userCredentials = await createUserWithEmailAndPassword(auth, email, password)
@@ -47,22 +48,60 @@ const SignUp = () => {
         }
     }
 
-    return (
-        <div>
-            <h1>SignUp page</h1>
-            <div>
-                <form onSubmit={(e) => handleSubmit(e)}>
-                    <input type="text" placeholder="name..." value={name} onChange={(e) => setName(e.target.value)} />
-                    <br />
-                    <input type="email" placeholder="email..." value={email} onChange={(e) => setEmail(e.target.value)} />
-                    <br/>
-                    <input type="password" placeholder="password..." value={password} onChange={(e) => setPassword(e.target.value)} />
-                    <br/>
-                    <button type="submit">Sign up</button>
-                </form>
-            </div>
-        </div>
-    )
-}
+  return (
+    <div className={signUpStyles.page}>
+      <div className={signUpStyles.box}>
+        <h1 className={signUpStyles.fixMe}>Register</h1>
+        <p className={signUpStyles.fixMeParagraph}>
+          By signing up I agree to the tiny seeds Privacy Policy and Terms of
+          Service
+        </p>
 
-export default SignUp
+        <div>
+          <form onSubmit={(e) => handleSubmit(e)}>
+            <input
+              id={signUpStyles.input}
+              type="text"
+              placeholder="Full Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <div>
+              <h8 id={signUpStyles.underBoxText}>
+                <b>Make sure it matches the name on your government ID</b>
+              </h8>
+            </div>
+            <input
+              id={signUpStyles.input}
+              type="text"
+              placeholder="Email Address"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <br></br>
+            <div>
+              <h8 id={signUpStyles.underBoxText}>
+                <b>We'll email you purchase confirmation and receipts</b>
+              </h8>
+            </div>
+            <input
+              id={signUpStyles.input}
+              type="text"
+              placeholder="Password"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <br />
+            <br></br>
+            <button type="submit" id={signUpStyles.myButton}>
+              Create Account
+            </button>{" "}
+            <br></br>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default SignUp;

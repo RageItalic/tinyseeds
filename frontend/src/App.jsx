@@ -31,12 +31,12 @@ function App() {
       <BrowserRouter>
         <Nav />
         <Routes>
-          <Route index path='/' element={<Home />} />
-          <Route path="/signin" element={<SignIn/>} />
-          <Route path="/signup" element={<SignUp/>} />
-          <Route path="/plants" element={<Plants/>}/>
+          <Route index path="/" element={<Home />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/plants" element={<Plants />} />
           <Route path="/plants/:plantID" element={<IndividualPlant />} />
-          <Route path="/checkout" element={<Checkout />}/>
+          <Route path="/checkout" element={<Checkout />} />
           <Route path="/checkout/success" element={<CheckoutSuccess />} />
           <Route path="/checkout/error" element={<CheckoutError />} />
           {/* <Route path="/admin" element={
@@ -51,7 +51,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

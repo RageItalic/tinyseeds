@@ -1,0 +1,56 @@
+.page {
+  color: #3f423a;
+  background-image: url("../assets/pic3.png");
+  background-repeat: no-repeat;
+  background-position: cover;
+  width: 100vw;
+  height: 100vh;
+}
+
+.box {
+  position: relative;
+  float: right;
+  width: 40%;
+  background-color: #e3e4dd;
+  border-radius: 2%;
+  border: 3px solid #e3e4dd;
+  margin-right: 5%;
+  padding: 10px;
+  text-align: center;
+}
+
+.fixMe {
+  margin-top: 0px;
+}
+
+.fixMeParagraph {
+  font-size: 80%;
+  font-style: normal;
+}
+
+#underBoxText {
+  color: #3f423a;
+  font-size: 65%;
+  float: left;
+  padding-left: 11%;
+}
+
+#myButton {
+  background-color: #b3b9ab;
+  font-size: 90%;
+  border-radius: 0;
+  text-align: center;
+  width: 440px;
+  height: 50px;
+  color: white;
+}
+
+#input {
+  width: 400px;
+  height: 18px;
+  border-radius: 2%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: 1px solid #b3b9ab;
+  background-color: #e3e4dd;
+}

@@ -1,36 +1,34 @@
-import { signOut } from "firebase/auth"
-import { useState, useEffect } from "react"
-import { Link, useNavigate } from "react-router-dom"
-import PureModal from 'react-pure-modal';
-import 'react-pure-modal/dist/react-pure-modal.min.css';
-import { useAuth } from "../hooks/useAuth"
-import useAuthStore from "../store/auth"
-import useCartStore from "../store/cart"
-import { auth } from "../utils/firebase"
-import Cart from "./Cart";
+import { signOut } from "firebase/auth";
+import { child, getDatabase, ref, get, set } from "firebase/database";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
+import useAuthStore from "../store/auth";
+import { auth } from "../utils/firebase";
+import useCartStore from "../store/cart";
 
 const Nav = () => {
-    const navigate = useNavigate()
-    const user = useAuthStore(state => state.user)
-    const setUser = useAuthStore(state => state.setUser)
-    const cart = useCartStore(state => state.cart)
-    const addToCart = useCartStore(state => state.addToCart)
-    const {isAuthenticated, isVerifying} = useAuth()
-    const [modalIsOpen, setModalIsOpen] = useState(false)
+  const navigate = useNavigate();
+  const user = useAuthStore((state) => state.user);
+  const setUser = useAuthStore((state) => state.setUser);
+  const cart = useCartStore((state) => state.cart);
+  const addToCart = useCartStore((state) => state.addToCart);
+  const { isAuthenticated, isVerifying } = useAuth();
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
-    async function handleUserSignOut() {
-        try {
-            console.log("signing out")
-            await signOut(auth)
-            setUser(null)
-            navigate("/")
-        } catch (e) {
-            const eCode = e.code;
-            const eMessage = e.message;
-            console.log(eCode, eMessage)
-            alert("Logout failed. Try again.")
-        }
+  async function handleUserSignOut() {
+    try {
+      console.log("signing out");
+      await signOut(auth);
+      setUser(null);
+      navigate("/");
+    } catch (e) {
+      const eCode = e.code;
+      const eMessage = e.message;
+      console.log(eCode, eMessage);
+      alert("Logout failed. Try again.");
     }
+  }
 
     useEffect(() => {
         // get cart from localstorage on page refresh
