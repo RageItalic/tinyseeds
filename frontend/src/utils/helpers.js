@@ -103,6 +103,7 @@ export function saveOrder(purchaseOrder) {
 /**
  * Add a review to single plant
  * @param {*} review Review object
+ * @param {*} pid Plant id
  * Here is an example review object
  *  const testReview = {
     id: reviewId,
@@ -116,7 +117,6 @@ export function saveOrder(purchaseOrder) {
       title: "look at this",
     },
   };
- * @param {*} pid Plant id
  */
 export function addReview(review, pid) {
   const db = getDatabase();
