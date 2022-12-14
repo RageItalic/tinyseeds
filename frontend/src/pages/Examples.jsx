@@ -8,6 +8,7 @@ import {
   saveOrder,
   getUser,
   getAllPlants,
+  getAllPlantsSold,
 } from "../utils/helpers";
 
 const exampleGet = async () => {
@@ -88,7 +89,8 @@ const Examples = () => {
     // addReview(testReview, "oldrle"); //DO NOT UNCOMMENT UNLESS YOUR NAME IS PAUL OR PARTH
     // saveOrder(testPurchaseOrder);  //DO NOT UNCOMMENT UNLESS YOUR NAME IS PAUL OR PARTH
     // getUser("lumcva");
-    getAllPlants(filter);
+    // getAllPlants(filter);
+    getAllPlantsSold(6, 2021);
   }, []);
 
   return (
