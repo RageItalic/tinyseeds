@@ -226,10 +226,11 @@ export async function getAllPlantsSold(month, year) {
     if (snapshot.val()) {
       Object.values(snapshot.val()).forEach((order) => {
         let date = new Date(order.date);
-        // console.log(`Month = ${date.getMonth()}\tYear = ${date.getFullYear()}`);
         if (date.getMonth() == month && date.getFullYear() == year) {
           Object.values(order.productsBought).forEach((plant) => {
-            plantIds.push(plant.productId);
+            if (plantIds.indexOf(plant.productId) === -1) {
+              plantIds.push(plant.productId);
+            }
           });
         }
       });
