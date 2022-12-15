@@ -53,14 +53,14 @@ const SignIn = () => {
                         <h4>email</h4>
                       </div> */}
                       <h4 id="email_tag">email</h4>
-                      <input type="email" placeholder="email..." value={email} onChange={(e) => setEmail(e.target.value)}/>
+                      <input className={styles.form_input}  type="email" placeholder="email..." value={email} onChange={(e) => setEmail(e.target.value)}/>
                     </div>
                     <div className={styles.password_container}>
                       {/* <div id="password_tag">
                         <h4>password</h4>
                       </div> */}
                       <h4 id="password_tag">password</h4>
-                      <input type="password" placeholder="password..." value={password} onChange={(e) => setPassword(e.target.value)} />
+                      <input className={styles.form_input} type="password" placeholder="password..." value={password} onChange={(e) => setPassword(e.target.value)} />
                     </div>
                     <div className={styles.signIn_container}>
                         <input className="button" value="Sign-In" type="submit"/>

@@ -1,5 +1,6 @@
 import homeStyles from "../styles/home.module.css";
 import img from "../assets/homePic.png";
+import {Link} from "react-router-dom"
 
 const Home = () => {
   return (
@@ -18,9 +19,9 @@ const Home = () => {
               <b>We love plants like you do.</b>
               <p>tiny seeds is a modern plants e-commerce store.</p>
             </div>
-            <button type="button" id={homeStyles.myButton}>
-              Go Shopping
-            </button>
+            <Link to="/plants" >
+             <button id={homeStyles.myButton}>Go Shopping</button>
+            </Link>
           </h1>
         </div>
       </div>

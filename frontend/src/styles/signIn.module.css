@@ -115,7 +115,7 @@
 
 /* ----------------------------------------------INPUT STYLING---------------------------------------------- */
 /* input styling */
-input[type="email"],
+/* input[type="email"],
 input[type="password"] {
   font-size: 20px;
   background-color: #bbbfb6;
@@ -127,9 +127,27 @@ input[type="password"] {
   display: flex;
   width: 73%;
   /* margin-left: 15%; */
+  /* margin-bottom: 2%;
+  color: #b2913d; */
+/* }  */
+
+
+.form_input{
+  font-size: 20px;
+  background-color: white;
+  padding: 12px;
+  display: inline-block;
+  border: 1px solid black;
+  border-radius: 4px;
+  box-sizing: border-box;
+  display: flex;
+  width: 73%;
   margin-bottom: 2%;
   color: #b2913d;
+  align-items: center;
+  justify-content: center;
 }
+
 
 /* button styling */
 .signIn_container input[type="submit"]:hover {

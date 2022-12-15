@@ -1,41 +1,65 @@
 
 /* ----------------------------------------------RIGHT SIDE STYLING---------------------------------------------- */
 
-form{
+.form_container form{
     background-color: white;
     margin-bottom: 10%;
     align-items: center;
     justify-content: center;
-    /* display: flex; */
     overflow: auto;
-    /* margin-left: 10%; */
 }
 
-h1{
+.form_container{
+    overflow: auto;
+}
+
+.h1_container h1{
     align-items: center;
     justify-content: center;
-    /* margin-left: 10%; */
     background-color: white;
     text-align: center;
 }
 
-h4{
+.h4_container{
     align-items: center;
     justify-content: center;
     margin-top: 0%;
     text-align: center;
 }
 
-label {
+/* .label_form_container label {
     font-style: bold;
     font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-    /* background-color:aqua; */
+    align-items: center;
+    justify-content: center;
+    margin-left: 15%;
+} */
+
+#email{
+    font-style: bold;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
     align-items: center;
     justify-content: center;
     margin-left: 15%;
 }
 
-input[type="email"] {
+#address{
+    font-style: bold;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15%;
+}
+
+#cardInfo{
+    font-style: bold;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15%;
+}
+
+.form_input{
     font-size: 20px;
     background-color: white;
     padding: 12px;
@@ -45,7 +69,23 @@ input[type="email"] {
     box-sizing: border-box;
     display: flex;
     width: 73%;
-    /* margin-left: 1%; */
+    margin-bottom: 2%;
+    color: #b2913d;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15%;
+}
+
+/* input[type="email"] {
+    font-size: 20px;
+    background-color: white;
+    padding: 12px;
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 4px;
+    box-sizing: border-box;
+    display: flex;
+    width: 73%;
     margin-bottom: 2%;
     color: #b2913d;
     align-items: center;
@@ -63,26 +103,21 @@ input[type="text"] {
     box-sizing: border-box;
     display: flex;
     width: 73%;
-    /* margin-left: 1%; */
     margin-bottom: 2%;
     color: #b2913d;
     align-items: center;
     justify-content: center;
     margin-left: 15%;
-  }
+  } */
 
 button[type="submit"] {
     font-size: 28px;
-    /* background-color: #5b765b; */
-    /* background-color: aqua; */
     border-radius: 12px;
     padding: 5px 10px;
     color: white;
     background-color: black;
-    /* border-color:#5b765b; */
     cursor: pointer;
     width: 73%;
-    /* margin-left: 15%; */
     border: none;
     transition: all 0.3s ease;
     align-items: center;
@@ -90,9 +125,9 @@ button[type="submit"] {
     margin-left: 15%;
   }
   
-  .button-flex,
+  /* .button-flex,
   div {
     display: block;
-  }
+  } */
 
   

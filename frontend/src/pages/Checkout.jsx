@@ -192,7 +192,7 @@ const Checkout = () => {
                             ? cart.map((item, index) => (
                                 <CartItem item={item} index={index} key={item.id} />
                             ))
-                            : <p style={{textAlign: "center"}}>Cart Empty!</p>
+                            : <p>Cart Empty!</p>
                         }
                     </div>
                 </div>
@@ -200,34 +200,40 @@ const Checkout = () => {
 
             {/* right section */}
             <div style={{display: "flex", flex: "0.5", boxShadow: "-8px 0px 15px -3px rgba(0,0,0,0.1)", flexDirection: "column", padding: "20px", backgroundColor:"white"}}>
-                <h1>Pay with card</h1>
-                <h4 style={{textAlign: "center"}}>:]</h4>
-                <form onSubmit={(e) => handlePayment(e)}>
-                    <div>
-                        <label>Email</label>
+                <div className={styles.h1_container}>
+                    <h1>Pay with card</h1>
+                </div>
+                <div className={styles.h4_container}>
+                    <h4> :] </h4>
+                </div>
+                <div className={styles.form_container}>
+                    <form onSubmit={(e) => handlePayment(e)}>
+                        <div>
+                            <label id={styles.email}>Email</label>
+                            <br />
+                            <input className={styles.form_input} type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="email..." required />
+                        </div>
                         <br />
-                        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="email..." required />
-                    </div>
-                    <br />
-                    <div>
-                        <label>Address</label>
+                        <div>
+                            <label id={styles.address}>Address</label>
+                            <br />
+                            <input className={styles.form_input} type="text" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="123 Rainbow Lane, Unicorn Town, Imaginarium" required />
+                            <input className={styles.form_input} type="text" value={zipCode} onChange={(e) => setZipCode(e.target.value)} placeholder="Q9A P0Z" required />
+                            <input className={styles.form_input} type="text" value="Canada" readOnly placeholder="country..."  />
+                        </div>
                         <br />
-                        <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="123 Rainbow Lane, Unicorn Town, Imaginarium" required />
-                        <input type="text" value={zipCode} onChange={(e) => setZipCode(e.target.value)} placeholder="Q9A P0Z" required />
-                        <input type="text" value="Canada" readOnly placeholder="country..."  />
-                    </div>
-                    <br />
-                    <div>
-                        <label>Card Information</label>
+                        <div>
+                            <label id={styles.cardInfo}>Card Information</label>
+                            <br />
+                            <input className={styles.form_input} type="text" value={cardName} onChange={(e) => setCardName(e.target.value)} placeholder="Oswald Oswaldson" required />
+                            <input className={styles.form_input} type="text" value={cardNumber} onChange={(e) => setCardNumber(e.target.value)} placeholder="1234 1234 1234 1234" required />
+                            <input className={styles.form_input} type="text" value={exp} onChange={(e) => setExp(e.target.value)} placeholder="MM / YY" required />
+                            <input className={styles.form_input} type="text" value={cvc} onChange={(e) => setCvc(e.target.value)} placeholder="CVC" required />
+                        </div>
                         <br />
-                        <input type="text" value={cardName} onChange={(e) => setCardName(e.target.value)} placeholder="Oswald Oswaldson" required />
-                        <input type="text" value={cardNumber} onChange={(e) => setCardNumber(e.target.value)} placeholder="1234 1234 1234 1234" required />
-                        <input type="text" value={exp} onChange={(e) => setExp(e.target.value)} placeholder="MM / YY" required />
-                        <input type="text" value={cvc} onChange={(e) => setCvc(e.target.value)} placeholder="CVC" required />
-                    </div>
-                    <br />
-                    <button type="submit">Pay</button>
-                </form>
+                        <button className={styles.checkout} type="submit">Pay</button>
+                    </form>
+                </div>
             </div>
         </div>
     )
