@@ -79,7 +79,7 @@ export async function getPlant(pid) {
  * Typical filter object looks like:
  * filter: {
  *   type: "Cactus"
- *   featured: false
+ *   featured: "disable"
  * }
  * @returns Returns array of plants with specified filter
  */
@@ -87,7 +87,7 @@ export const getAllPlants = async (filter) => {
   const db = getDatabase();
 
   //no filter passed. Return all plants
-  if (filter == null) {
+  if (filter === undefined || filter === null) {
     try {
       const snapshot = await get(ref(db, `/plants`));
       if (snapshot.exists()) {
@@ -96,16 +96,34 @@ export const getAllPlants = async (filter) => {
         consoe.log("no plants found");
       }
     } catch (e) {
-      console.error("gettting plants failed", e);
+      console.error("getting plants failed", e);
     }
   }
   let plants = [];
+  console.log(filter.featured);
   try {
     const snapshot = await get(ref(db, `/plants`));
     if (snapshot.exists()) {
-      Object.values(snapshot.val()).forEach((plant) => {
-        if (plant.featured == filter.featured && plant.type == filter.type) {
-          plants.push(plant);
+      Object.values(snapshot.val()).forEach(async (plant) => {
+        if (filter.type === "All") {
+          if (String(filter.featured) === "false") {
+            plants.push(plant);
+          } else {
+            if (filter.featured && plant.featured) {
+              plants.push(plant);
+            }
+          }
+        } else {
+          if (String(filter.featured) === "false") {
+            if (filter.type === plant.type) plants.push(plant);
+          } else {
+            if (
+              String(filter.featured) === String(plant.featured) &&
+              plant.type === filter.type
+            ) {
+              plants.push(plant);
+            }
+          }
         }
       });
     } else {
