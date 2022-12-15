@@ -38,36 +38,51 @@ const ReviewComponent = ({plantID}) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="title">Title</label>
-        <input
-          id="title"
-          type="text"
-          value={form.title}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="password">Description</label>
-        <input
-          id="description"
-          type="text"
-          value={form.description}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="rating">Rating (from 0-5)</label>
-        <input
-          id="rating"
-          type="number"
-          value={form.rating}
-          onChange={handleChange}
-        />
-      </div>
-      <button type="submit">Submit</button>
-    </form>
+    <div style={{display: 'flex', flexWrap: 'wrap'}}>
+      <h2>Add a review</h2>
+      <form onSubmit={handleSubmit}>
+        {/* <div>
+          <label htmlFor="title">Title</label>
+          <input
+            id="title"
+            type="text"
+            value={form.title}
+            onChange={handleChange}
+          />
+        </div> */}
+        <div style={{flex: '0 0 auto', width: '50%', marginBottom: '10px'}}>
+          <input
+            id="title"
+            type="text"
+            placeholder='Title'
+            value={form.title}
+            onChange={handleChange}
+            style={{background: 'white', border: '1px solid #e6e6e6', color: '#333', padding: '2px 10px 2px 20px', width: '100%', fontSize:'14px', height:'45px'}}
+          />
+        </div>
+        <div style={{flex: '0 0 auto', width: '50%', marginBottom: '10px'}}>
+          <textarea
+            id="description"
+            type="text"
+            placeholder='Description'
+            value={form.description}
+            onChange={handleChange}
+            style={{background: 'white', border: '1px solid #e6e6e6', color: '#333', padding: '20px 10px 2px 20px', width: '100%', fontSize:'14px', height:'180px', marginBottom: '20px', resize: 'horizontal'}}
+          />
+        </div>
+        <div style={{flex: '0 0 auto', width: '50%', marginBottom: '10px'}}>
+          <input
+            id="rating"
+            type="number"
+            placeholder='Rating (from 0-5)'
+            value={form.rating}
+            onChange={handleChange}
+            style={{background: 'white', border: '1px solid #e6e6e6', color: '#333', padding: '2px 10px 2px 20px', width: '100%', fontSize:'14px', height:'45px'}}
+          />
+        </div>
+        <button type="submit" style={{backgroundColor: '#333', height: "auto", padding: "12px 50px", textTransform: "uppercase", width: "auto"}}>Submit</button>
+      </form>
+    </div>
   );
 };
 
