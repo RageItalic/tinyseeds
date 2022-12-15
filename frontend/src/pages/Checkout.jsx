@@ -25,6 +25,24 @@ const Checkout = () => {
     const handlePayment = (e) => {
         e.preventDefault()
 
+        if (!isZipCodeValid(zipCode)){
+            return
+        }
+
+        if (!isCardValid(cardNumber)){
+            return
+        }
+
+        if (!isCvcInputValid(cvc)){
+            return
+        }
+
+        if (!isCardExpired(exp)){
+            return
+        }
+
+
+
         const checkoutAttempt = Number(localStorage.getItem("checkoutAttempt"))
 
         if (checkoutAttempt <= 1 ) {
@@ -66,28 +84,68 @@ const Checkout = () => {
         
     }
 
-    const handleZipCodeInput = (e) => {
+    const isZipCodeValid = (zip) => {
         //do card number regex validation here
-
-        setZipCode(e.target.value)
+        const zipRegEx = /^[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z][ -]?\d[ABCEGHJ-NPRSTV-Z]\d$/i
+        if(!zipRegEx.test(zip)){
+            alert("Zip code not valid!")
+            setZipCode("")
+            return false
+        }
+        return true
     }
 
-    const handleCardNumberInput = (e) => {
+    const isCardValid = (card) => {
         //do card number regex validation here
-
-        setCardNumber(e.target.value)
+        const cardNum = card.replaceAll(" ", "").replaceAll("-", "")  
+        console.log("CHECKING CARD NUM", cardNum)
+        const cardRegex = /\d{16}/g
+        if(!cardRegex.test(cardNum)){
+            alert("Card number not valid!")
+            setCardNumber("")
+            return false
+        }
+        return true
     }
 
-    const handleExpiryInput = (e) => {
+    const isCardExpired = (exp) => {
         //do card number regex here
+        const expDate = /^\d{2}\/\d{2}$/g
+        const date = new Date();
+        let todayYear = Number(date.getFullYear().toString().split("20")[1]);
+        let todayMonth = date.getMonth() + 1;
+        let userExpMonth = exp.split("/")[0]
+        let userExpYear = exp.split("/")[1]
 
-        setExp(e.target.value)
+        if (userExpYear >= todayYear && userExpMonth <= todayMonth) {
+            console.log("working!3")
+            return true
+        } 
+        
+        else if (userExpYear >= todayYear && userExpMonth >= todayMonth) {
+            console.log("working!4")
+            return true
+        } 
+        
+        console.log("TODAY YEAR", todayYear)
+        console.log("TODAY MONTH", todayMonth)
+        console.log("CHECKING EXP", exp)
+
+        alert("Checking...Card not valid!")
+        setExp("")
+        return false
     }
 
-    const handleCvcInput = (e) => {
+    const isCvcInputValid = (c) => {
         //do card number regex here
-
-        setCvc(e.target.value)
+        const cvcRegEx = /^[0-9]{3,4}$/
+        console.log("CHECKING CVC", c)
+        if(!cvcRegEx.test(c)){
+            alert("CVC number not valid!")
+            setCvc("")
+            return false
+        }
+        return true
     }
 
     useEffect(() => {
@@ -138,7 +196,7 @@ const Checkout = () => {
                         <label>Address</label>
                         <br />
                         <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="123 Rainbow Lane, Unicorn Town, Imaginarium" required />
-                        <input type="text" value={zipCode} onChange={(e) => handleZipCodeInput(e)} placeholder="Q9A P0Z" required />
+                        <input type="text" value={zipCode} onChange={(e) => setZipCode(e.target.value)} placeholder="Q9A P0Z" required />
                         <input type="text" value="Canada" readOnly placeholder="country..."  />
                     </div>
                     <br />
@@ -146,9 +204,9 @@ const Checkout = () => {
                         <label>Card Information</label>
                         <br />
                         <input type="text" value={cardName} onChange={(e) => setCardName(e.target.value)} placeholder="Oswald Oswaldson" required />
-                        <input type="text" value={cardNumber} onChange={(e) => handleCardNumberInput(e)} placeholder="1234 1234 1234 1234" required />
-                        <input type="text" value={exp} onChange={(e) => handleExpiryInput(e)} placeholder="MM / YY" required />
-                        <input type="text" value={cvc} onChange={(e) => handleCvcInput(e)} placeholder="CVC" required />
+                        <input type="text" value={cardNumber} onChange={(e) => setCardNumber(e.target.value)} placeholder="1234 1234 1234 1234" required />
+                        <input type="text" value={exp} onChange={(e) => setExp(e.target.value)} placeholder="MM / YY" required />
+                        <input type="text" value={cvc} onChange={(e) => setCvc(e.target.value)} placeholder="CVC" required />
                     </div>
                     <br />
                     <button type="submit">Pay</button>
