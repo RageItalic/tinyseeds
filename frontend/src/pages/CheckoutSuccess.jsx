@@ -16,7 +16,7 @@ const CheckoutSuccess = () => {
                     <img src="/src/assets/checkoutCart.png" alt="checkout" />
                 </div>
                 <div className={styles.p_container}>
-                    <p>Your order has been placed. Check your email for more details.</p>
+                    <p>Your order has been placed.</p>
                 </div>
             </div>
         </div> 
