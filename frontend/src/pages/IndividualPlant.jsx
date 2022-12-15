@@ -90,7 +90,7 @@ const IndividualPlant = () => {
               <img src={c} style={{ display: "flex", flexDirection: "row",maxWidth: "25%" }} />
             ))
             }
-           { plant.imageURLS && <img src={plant.imageURLS[0]} style={{ display: "flex", flexDirection: "row",maxWidth: "25%" }} /> }
+           {/* { plant.imageURLS && <img src={plant.imageURLS[0]} style={{ display: "flex", flexDirection: "row",maxWidth: "25%" }} /> } */}
         </div>
         <div style={{flex: "1"}}>
           <div>
