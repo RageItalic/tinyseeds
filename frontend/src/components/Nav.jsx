@@ -31,7 +31,8 @@ const Nav = () => {
             alert("Logout failed. Try again.")
         }
     }
-
+    
+    
     useEffect(() => {
         // get cart from localstorage on page refresh
         if (cart.length === 0) {
@@ -40,35 +41,82 @@ const Nav = () => {
                 ? addToCart("LOAD_EXISTING_CART", newCart)
                 : addToCart("LOAD_EXISTING_CART", [])
         }
-
         console.log("isVerifying: ", isVerifying)
     }, [isVerifying])
-
+    
+    
     return (
-        <nav>
-            <Cart modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen}  />
-            {isVerifying && <p>loading...</p>}
-            {user && isAuthenticated
-            ?   <>
-                    <p>Logged in as {user.displayName ?? user.email}</p>
-                    <button onClick={() => handleUserSignOut()}>Sign out</button>
-                </>
-            :   <>
-                    <Link to="/signup">Sign up</Link>
-                    <br />
-                    <Link to="/signin">Sign in</Link>
-                </>
-            }
-            <br />
-            <Link to="/plants">All Plants</Link>
-            <br />
-            <Link to="/plants/1">Individual Plant</Link>
-            <br />
-            <Link to="/examples">Examples</Link>
-            <br />
-            <a onClick={() => setModalIsOpen(true)}>View Cart ({cart.length} items)</a>
-        </nav>
-    )
-}
+      <nav>
+        <Cart modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} />
+        {isVerifying && <p>loading...</p>}
+        {user && isAuthenticated ? (
+          <>
+            <ul id={navStyles.list}>
+              <li id={navStyles.li}>
+                <Link to="/">Tiny Seeds</Link>
+              </li>
+              <li id={navStyles.li}>
+                <Link to="/plants"> Plants</Link>
+              </li>
+              <li id={navStyles.li}>
+                <Link to="/plants/1">Individual Plant</Link>
+              </li>
+              <li id={navStyles.li}>
+                <Link to="/examples">Examples</Link>
+              </li>
+              <div className="right">
+                <li id={navStyles.liRight}>
+                  <a onClick={() => handleUserSignOut()}>Sign out</a>
+                </li>
+                <li id={navStyles.liRight}>
+                  <a>{user.displayName ?? user.email}</a>
+                </li>
+                <li id={navStyles.liRight}>
+                  <Link to="/orders">Orders</Link>
+                </li>
+                <li id={navStyles.liRight}>
+                  <a onClick={() => setModalIsOpen(true)}>Cart ({cart.length})</a>
+                </li>
+                <li id={navStyles.liRight}>
+                  <a> Wishlist</a>
+                </li>
+              </div>
+            </ul>
+          </>
+        ) : (
+          <>
+            <ul id={navStyles.list}>
+              <li id={navStyles.li}>
+                <Link to="/Home">Tiny Seeds</Link>
+              </li>
+              <li id={navStyles.li}>
+                <Link to="/plants"> Plants</Link>
+              </li>
+              <li id={navStyles.li}>
+                <Link to="/examples">Cart</Link>
+              </li>
+              <li id={navStyles.li}>
+                <Link to="/plants/1">Individual Plant</Link>
+              </li>
+              <li id={navStyles.li}>
+                <Link to="/examples">Examples</Link>
+              </li>
+              <div className="right">
+                <li id={navStyles.liRight}>
+                  <Link to="/signup">Register</Link>
+                </li>
+                <li id={navStyles.liRight}>
+                  <Link to="/signin">Sign in</Link>
+                </li>
+                <li id={navStyles.liRight}>
+                  <a onClick={() => setModalIsOpen(true)}>Cart ({cart.length})</a>
+                </li>
+              </div>
+            </ul>
+          </>
+        )}
+      </nav>
+    );
+};
 
 export default Nav

@@ -10,6 +10,7 @@ import Nav from "./components/Nav";
 import CheckoutSuccess from "./pages/CheckoutSuccess";
 import CheckoutError from "./pages/CheckoutError";
 import Checkout from "./pages/Checkout";
+import PastOrders from "./pages/PastOrders";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/checkout/success" element={<CheckoutSuccess />} />
           <Route path="/checkout/error" element={<CheckoutError />} />
+          <Route path="/orders" element={<PastOrders />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/examples" element={<Examples />} />
         </Routes>

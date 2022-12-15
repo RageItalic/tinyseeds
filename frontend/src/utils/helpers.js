@@ -74,6 +74,52 @@ export async function getPlant(pid) {
 }
 
 /**
+ * Return multiple plants
+ * @param {*} filters Filter for plants
+ * Typical filter object looks like:
+ * filter: {
+ *   type: "Cactus"
+ *   featured: false
+ * }
+ * @returns Returns array of plants with specified filter
+ */
+export const getAllPlants = async (filter) => {
+  const db = getDatabase();
+
+  //no filter passed. Return all plants
+  if (filter == null) {
+    try {
+      const snapshot = await get(ref(db, `/plants`));
+      if (snapshot.exists()) {
+        return Object.values(snapshot.val());
+      } else {
+        consoe.log("no plants found");
+      }
+    } catch (e) {
+      console.error("gettting plants failed", e);
+    }
+  }
+  let plants = [];
+  try {
+    const snapshot = await get(ref(db, `/plants`));
+    if (snapshot.exists()) {
+      Object.values(snapshot.val()).forEach((plant) => {
+        if (plant.featured == filter.featured && plant.type == filter.type) {
+          plants.push(plant);
+        }
+      });
+    } else {
+      console.log("no plants found");
+    }
+  } catch (e) {
+    console.error(e);
+  }
+
+  console.log(plants);
+  return plants;
+};
+
+/**
  * Save a purchase order in the database
  * @param {} purchaseOrder The order
  * Here is an example purchaseOrder object
@@ -145,4 +191,40 @@ export async function getUser(uid) {
   }
   console.log(user);
   return user;
+}
+
+/**
+ * Get all plants sold in specific month and year
+ * @param {*} month Month it was sold
+ * @param {*} year Year it was sold
+ * @returns Plants sold in that month and year
+ */
+export async function getAllPlantsSold(month, year) {
+  const db = getDatabase();
+  let plants = [];
+  let plantIds = [];
+  try {
+    const snapshot = await get(ref(db, `/purchaseOrders`)); //O(1)
+    if (snapshot.val()) {
+      Object.values(snapshot.val()).forEach((order) => {
+        let date = new Date(order.date);
+        // console.log(`Month = ${date.getMonth()}\tYear = ${date.getFullYear()}`);
+        if (date.getMonth() == month && date.getFullYear() == year) {
+          Object.values(order.productsBought).forEach((plant) => {
+            plantIds.push(plant.productId);
+          });
+        }
+      });
+    }
+  } catch (e) {
+    console.error(e);
+  }
+
+  plantIds.forEach(async (plantId) => {
+    let plant = await getPlant(plantId);
+    plants.push(plant);
+  });
+
+  console.log(plants);
+  return plants;
 }
