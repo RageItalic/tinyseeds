@@ -1,10 +1,12 @@
 import { signOut } from "firebase/auth";
-import { child, getDatabase, ref, get, set } from "firebase/database";
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import useAuthStore from "../store/auth";
 import { auth } from "../utils/firebase";
+import navStyles from "../styles/nav.module.css";
+import Cart from "./Cart";
+import "react-pure-modal/dist/react-pure-modal.min.css";
 import useCartStore from "../store/cart";
 
 const Nav = () => {
@@ -12,7 +14,7 @@ const Nav = () => {
   const user = useAuthStore((state) => state.user);
   const setUser = useAuthStore((state) => state.setUser);
   const cart = useCartStore((state) => state.cart);
-  const addToCart = useCartStore((state) => state.addToCart);
+  // const addToCart = useCartStore((state) => state.addToCart);
   const { isAuthenticated, isVerifying } = useAuth();
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -32,25 +34,74 @@ const Nav = () => {
 
   return (
     <nav>
+      <Cart modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} />
       {isVerifying && <p>loading...</p>}
       {user && isAuthenticated ? (
         <>
-          <p>Logged in as {user.displayName ?? user.email}</p>
-          <button onClick={() => handleUserSignOut()}>Sign out</button>
+          <ul id={navStyles.list}>
+            <li id={navStyles.li}>
+              <Link to="/">Tiny Seeds</Link>
+            </li>
+            <li id={navStyles.li}>
+              <Link to="/plants"> Plants</Link>
+            </li>
+            <li id={navStyles.li}>
+              <Link to="/plants/1">Individual Plant</Link>
+            </li>
+            <li id={navStyles.li}>
+              <Link to="/examples">Examples</Link>
+            </li>
+            <div className="right">
+              <li id={navStyles.liRight}>
+                <a onClick={() => handleUserSignOut()}>Sign out</a>
+              </li>
+              <li id={navStyles.liRight}>
+                <a>{user.displayName ?? user.email}</a>
+              </li>
+              <li id={navStyles.liRight}>
+                <Link to="/orders">Orders</Link>
+              </li>
+              <li id={navStyles.liRight}>
+                <a onClick={() => setModalIsOpen(true)}>Cart ({cart.length})</a>
+              </li>
+              <li id={navStyles.liRight}>
+                <a> Wishlist</a>
+              </li>
+            </div>
+          </ul>
         </>
       ) : (
         <>
-          <Link to="/signup">Sign up</Link>
-          <br />
-          <Link to="/signin">Sign in</Link>
+          <ul id={navStyles.list}>
+            <li id={navStyles.li}>
+              <Link to="/Home">Tiny Seeds</Link>
+            </li>
+            <li id={navStyles.li}>
+              <Link to="/plants"> Plants</Link>
+            </li>
+            <li id={navStyles.li}>
+              <Link to="/examples">Cart</Link>
+            </li>
+            <li id={navStyles.li}>
+              <Link to="/plants/1">Individual Plant</Link>
+            </li>
+            <li id={navStyles.li}>
+              <Link to="/examples">Examples</Link>
+            </li>
+            <div className="right">
+              <li id={navStyles.liRight}>
+                <Link to="/signup">Register</Link>
+              </li>
+              <li id={navStyles.liRight}>
+                <Link to="/signin">Sign in</Link>
+              </li>
+              <li id={navStyles.liRight}>
+                <a onClick={() => setModalIsOpen(true)}>Cart ({cart.length})</a>
+              </li>
+            </div>
+          </ul>
         </>
       )}
-      <br />
-      <Link to="/plants">All Plants</Link>
-      <br />
-      <Link to="/plants/1">Individual Plant</Link>
-      <br />
-      <Link to="/examples">Examples</Link>
     </nav>
   );
 };
