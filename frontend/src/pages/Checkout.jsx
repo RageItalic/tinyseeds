@@ -110,30 +110,47 @@ const Checkout = () => {
 
     const isCardExpired = (exp) => {
         //do card number regex here
-        const expDate = /^\d{2}\/\d{2}$/g
+        // const expDate = /^\d{2}\/\d{2}$/g
+        console.log("CHECKING EXP TOP", exp)
         const date = new Date();
         let todayYear = Number(date.getFullYear().toString().split("20")[1]);
         let todayMonth = date.getMonth() + 1;
-        let userExpMonth = exp.split("/")[0]
-        let userExpYear = exp.split("/")[1]
+        let userExpMonth = Number(exp.split("/")[0])
+        let userExpYear = Number(exp.split("/")[1])
 
-        if (userExpYear >= todayYear && userExpMonth <= todayMonth) {
-            console.log("working!3")
+        if (userExpYear > todayYear){
+            console.log("User Year valid!",userExpYear )
+            console.log("TODAY YEAR", todayYear)
+            console.log("TODAY MONTH", todayMonth)
+            console.log("CHECKING EXP", exp)
             return true
-        } 
-        
-        else if (userExpYear >= todayYear && userExpMonth >= todayMonth) {
-            console.log("working!4")
-            return true
-        } 
-        
-        console.log("TODAY YEAR", todayYear)
-        console.log("TODAY MONTH", todayMonth)
-        console.log("CHECKING EXP", exp)
+        }
+        else if (todayYear === userExpYear){
+            if(userExpMonth > todayMonth){
+                console.log("TODAY YEAR", todayYear)
+                console.log("TODAY MONTH", todayMonth)
+                console.log("CHECKING EXP", exp)
+                console.log("User Month valid!",userExpMonth)
+                return true
+            }
+            if(userExpMonth === todayMonth){
+                console.log("TODAY YEAR", todayYear)
+                console.log("TODAY MONTH", todayMonth)
+                console.log("CHECKING EXP", exp)
+                console.log("User Month valid!",userExpMonth)
+                return true
+            }
+        }
+        // else{
+            // return false
+            console.log("TODAY YEAR", todayYear)
+            console.log("TODAY MONTH", todayMonth)
+            console.log("CHECKING EXP", exp)
 
-        alert("Checking...Card not valid!")
-        setExp("")
-        return false
+            alert("Checking...Card not valid!")
+            setExp("")
+            return false
+        // } 
     }
 
     const isCvcInputValid = (c) => {
