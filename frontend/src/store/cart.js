@@ -42,13 +42,19 @@ const useCartStore = create((set) => ({
         } 
         else if (type === "UPDATE_QUANTITY_AMOUNT") {
             let newCart = [...oldCart]
-            newCart[existingPlantIndex].qty < maxCapacity 
-                ? newCart[existingPlantIndex].qty += newItem.qty
-                : newCart[existingPlantIndex].qty = maxCapacity
+            let updatedCart = [...oldCart]
+            console.log(newCart[existingPlantIndex].qty)
+            console.log("New Cart Quantity" + newItem.qty)
+            let total = parseInt(newItem.qty,10) + parseInt(newCart[existingPlantIndex].qty,10) 
+            // console.log("New Quantity" + newItem.qty + newCart[existingPlantIndex].qty)
+            console.log("Total: " + total)
+            updatedCart[existingPlantIndex].qty < maxCapacity 
+                ? updatedCart[existingPlantIndex].qty = total
+                : updatedCart[existingPlantIndex].qty = maxCapacity
 
             return {
                 ...state,
-                cart: newCart
+                cart: updatedCart
             }
 
         }
