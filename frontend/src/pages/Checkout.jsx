@@ -4,6 +4,7 @@ import CartItem from "../components/CartItem"
 import useAuthStore from "../store/auth"
 import useCartStore from "../store/cart"
 import { nanoid } from 'nanoid'
+import styles from "../styles/checkout.module.css";
 
 
 
@@ -23,6 +24,24 @@ const Checkout = () => {
 
     const handlePayment = (e) => {
         e.preventDefault()
+
+        if (!isZipCodeValid(zipCode)){
+            return
+        }
+
+        if (!isCardValid(cardNumber)){
+            return
+        }
+
+        if (!isCvcInputValid(cvc)){
+            return
+        }
+
+        if (!isCardExpired(exp)){
+            return
+        }
+
+
 
         const checkoutAttempt = Number(localStorage.getItem("checkoutAttempt"))
 
@@ -65,28 +84,85 @@ const Checkout = () => {
         
     }
 
-    const handleZipCodeInput = (e) => {
+    const isZipCodeValid = (zip) => {
         //do card number regex validation here
-
-        setZipCode(e.target.value)
+        const zipRegEx = /^[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z][ -]?\d[ABCEGHJ-NPRSTV-Z]\d$/i
+        if(!zipRegEx.test(zip)){
+            alert("Zip code not valid!")
+            setZipCode("")
+            return false
+        }
+        return true
     }
 
-    const handleCardNumberInput = (e) => {
+    const isCardValid = (card) => {
         //do card number regex validation here
-
-        setCardNumber(e.target.value)
+        const cardNum = card.replaceAll(" ", "").replaceAll("-", "")  
+        console.log("CHECKING CARD NUM", cardNum)
+        const cardRegex = /\d{16}/g
+        if(!cardRegex.test(cardNum)){
+            alert("Card number not valid!")
+            setCardNumber("")
+            return false
+        }
+        return true
     }
 
-    const handleExpiryInput = (e) => {
+    const isCardExpired = (exp) => {
         //do card number regex here
+        // const expDate = /^\d{2}\/\d{2}$/g
+        console.log("CHECKING EXP TOP", exp)
+        const date = new Date();
+        let todayYear = Number(date.getFullYear().toString().split("20")[1]);
+        let todayMonth = date.getMonth() + 1;
+        let userExpMonth = Number(exp.split("/")[0])
+        let userExpYear = Number(exp.split("/")[1])
 
-        setExp(e.target.value)
+        if (userExpYear > todayYear){
+            console.log("User Year valid!",userExpYear )
+            console.log("TODAY YEAR", todayYear)
+            console.log("TODAY MONTH", todayMonth)
+            console.log("CHECKING EXP", exp)
+            return true
+        }
+        else if (todayYear === userExpYear){
+            if(userExpMonth > todayMonth){
+                console.log("TODAY YEAR", todayYear)
+                console.log("TODAY MONTH", todayMonth)
+                console.log("CHECKING EXP", exp)
+                console.log("User Month valid!",userExpMonth)
+                return true
+            }
+            if(userExpMonth === todayMonth){
+                console.log("TODAY YEAR", todayYear)
+                console.log("TODAY MONTH", todayMonth)
+                console.log("CHECKING EXP", exp)
+                console.log("User Month valid!",userExpMonth)
+                return true
+            }
+        }
+        // else{
+            // return false
+            console.log("TODAY YEAR", todayYear)
+            console.log("TODAY MONTH", todayMonth)
+            console.log("CHECKING EXP", exp)
+
+            alert("Checking...Card not valid!")
+            setExp("")
+            return false
+        // } 
     }
 
-    const handleCvcInput = (e) => {
+    const isCvcInputValid = (c) => {
         //do card number regex here
-
-        setCvc(e.target.value)
+        const cvcRegEx = /^[0-9]{3,4}$/
+        console.log("CHECKING CVC", c)
+        if(!cvcRegEx.test(c)){
+            alert("CVC number not valid!")
+            setCvc("")
+            return false
+        }
+        return true
     }
 
     useEffect(() => {
@@ -104,12 +180,11 @@ const Checkout = () => {
     }, [cart, user])
 
     return (
-        <div style={{display: "flex", flexDirection: "row", height: "100vh"}}>
-            
+        <div style={{display: "flex", flexDirection: "row", height: "100vh", backgroundColor: "white"}}>
             {/* left section */}
-            <div style={{display: "flex", flex: "0.5", flexDirection: "column", padding: "20px"}}>
+            <div style={{display: "flex", flex: "0.5", flexDirection: "column", padding: "20px", backgroundColor: "white", overflow: "auto"}}>
                 <div style={{display: "flex", flex: "1", alignItems: "center", flexDirection: "column"}}>
-                    <h3 style={{marginBottom: "0px", color: "gray"}}>Pay Tiny Seeds</h3>
+                    <h3 style={{marginBottom: "0px", color: "gray", alignItems: "center"}}>Pay Tiny Seeds</h3>
                     <h1 style={{marginTop: "0px"}}>$ {cartTotal}</h1>
                     <h4>You are checking out as {user ? user.email : 'guest'}</h4>
                     <div style={{display: "flex", flexDirection: "column", width: "400px", gap: "25px"}}>
@@ -124,9 +199,9 @@ const Checkout = () => {
             </div>
 
             {/* right section */}
-            <div style={{display: "flex", flex: "0.5", boxShadow: "-8px 0px 15px -3px rgba(0,0,0,0.1)", flexDirection: "column", padding: "20px"}}>
-                <h1>This is the checkout page</h1>
-                <h4 style={{textAlign: "center"}}>Pay with card</h4>
+            <div style={{display: "flex", flex: "0.5", boxShadow: "-8px 0px 15px -3px rgba(0,0,0,0.1)", flexDirection: "column", padding: "20px", backgroundColor:"white"}}>
+                <h1>Pay with card</h1>
+                <h4 style={{textAlign: "center"}}>:]</h4>
                 <form onSubmit={(e) => handlePayment(e)}>
                     <div>
                         <label>Email</label>
@@ -138,7 +213,7 @@ const Checkout = () => {
                         <label>Address</label>
                         <br />
                         <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="123 Rainbow Lane, Unicorn Town, Imaginarium" required />
-                        <input type="text" value={zipCode} onChange={(e) => handleZipCodeInput(e)} placeholder="Q9A P0Z" required />
+                        <input type="text" value={zipCode} onChange={(e) => setZipCode(e.target.value)} placeholder="Q9A P0Z" required />
                         <input type="text" value="Canada" readOnly placeholder="country..."  />
                     </div>
                     <br />
@@ -146,9 +221,9 @@ const Checkout = () => {
                         <label>Card Information</label>
                         <br />
                         <input type="text" value={cardName} onChange={(e) => setCardName(e.target.value)} placeholder="Oswald Oswaldson" required />
-                        <input type="text" value={cardNumber} onChange={(e) => handleCardNumberInput(e)} placeholder="1234 1234 1234 1234" required />
-                        <input type="text" value={exp} onChange={(e) => handleExpiryInput(e)} placeholder="MM / YY" required />
-                        <input type="text" value={cvc} onChange={(e) => handleCvcInput(e)} placeholder="CVC" required />
+                        <input type="text" value={cardNumber} onChange={(e) => setCardNumber(e.target.value)} placeholder="1234 1234 1234 1234" required />
+                        <input type="text" value={exp} onChange={(e) => setExp(e.target.value)} placeholder="MM / YY" required />
+                        <input type="text" value={cvc} onChange={(e) => setCvc(e.target.value)} placeholder="CVC" required />
                     </div>
                     <br />
                     <button type="submit">Pay</button>
