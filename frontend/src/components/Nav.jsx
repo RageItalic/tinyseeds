@@ -1,11 +1,13 @@
-import { signOut } from "firebase/auth";
-import { child, getDatabase, ref, get, set } from "firebase/database";
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import useAuthStore from "../store/auth";
 import { auth } from "../utils/firebase";
 import useCartStore from "../store/cart";
+import { signOut } from "firebase/auth";
+import Cart from './Cart'
+import 'react-pure-modal/dist/react-pure-modal.min.css';
+
 
 const Nav = () => {
   const navigate = useNavigate();

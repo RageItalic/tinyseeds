@@ -208,7 +208,7 @@ export async function getAllPlantsSold(month, year) {
     if (snapshot.val()) {
       Object.values(snapshot.val()).forEach((order) => {
         let date = new Date(order.date);
-        // console.log(`Month = ${date.getMonth()}\tYear = ${date.getFullYear()}`);
+        // console.log(`Month = ${date.getMonth()}\tYear = ${date.getFullYear()}, ${month} and ${year}`);
         if (date.getMonth() == month && date.getFullYear() == year) {
           Object.values(order.productsBought).forEach((plant) => {
             plantIds.push(plant.productId);
@@ -220,11 +220,37 @@ export async function getAllPlantsSold(month, year) {
     console.error(e);
   }
 
-  plantIds.forEach(async (plantId) => {
-    let plant = await getPlant(plantId);
-    plants.push(plant);
-  });
+  console.log("plant ids", plantIds)
 
-  console.log(plants);
+  // plantIds.forEach(async (plantId) => {
+  //   let plant = await getPlant(plantId);
+  //   console.log("plant", plant)
+  //   plants.push(plant);
+  //   console.log("plants", plants);
+  // })
+
+  for (let i = 0; i < plantIds.length; i++) {
+    let plant = await getPlant(plantIds[i]);
+    plants.push(plant);
+  }
+
+  console.log(plants)
+
   return plants;
+}
+
+
+export const getUserCount = async () => {
+  const db = getDatabase()
+
+  try {
+    const snapshot = await get(ref(db, '/users'))
+    if (snapshot.exists()) {
+      return Object.values(snapshot.val()).length
+    }
+  } catch (e) {
+    console.error("User count failed", e)
+  }
+
+  return 0
 }

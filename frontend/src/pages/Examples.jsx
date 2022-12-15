@@ -86,7 +86,14 @@ const Examples = () => {
   useEffect(() => {
     // exampleGet();
     // examplePost();
-    // getOrderHistory("fvc63b");
+
+    async function test() {
+      let data = await getOrderHistory("fvc63b")
+      console.log("LUKE HERE", data)
+    }
+    test()
+
+    // console.log("LUKE here ", async function () {});
     // getPlant("oldrle");
     // addReview(testReview, "oldrle"); //DO NOT UNCOMMENT UNLESS YOUR NAME IS PAUL OR PARTH
     // saveOrder(testPurchaseOrder);  //DO NOT UNCOMMENT UNLESS YOUR NAME IS PAUL OR PARTH
