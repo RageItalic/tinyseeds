@@ -46,12 +46,16 @@ const useCartStore = create((set) => ({
             console.log(newCart[existingPlantIndex].qty)
             console.log("New Cart Quantity" + newItem.qty)
             let total = parseInt(newItem.qty,10) + parseInt(newCart[existingPlantIndex].qty,10) 
+            if(total > 10) {
+                alert("Out of stock");
+            }
+            else {
             // console.log("New Quantity" + newItem.qty + newCart[existingPlantIndex].qty)
             console.log("Total: " + total)
             updatedCart[existingPlantIndex].qty < maxCapacity 
                 ? updatedCart[existingPlantIndex].qty = total
                 : updatedCart[existingPlantIndex].qty = maxCapacity
-
+            }
             return {
                 ...state,
                 cart: updatedCart

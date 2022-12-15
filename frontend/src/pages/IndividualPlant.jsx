@@ -36,10 +36,16 @@ const IndividualPlant = () => {
     }
 
     if (plantWithIdIndex === -1) {
+      if(quantity > 10) {
+        alert("Out of stock");
+        return;
+      }
       newItem.qty = quantity;
       addToCart("NEW_ITEM", cart, newItem)
       // console.log(cart)
-    } else {
+    } 
+   
+    else {
       //same plant obj found in cart
       // console.log(newItem.qty)
       // const newItems = {
@@ -59,6 +65,7 @@ const IndividualPlant = () => {
       newItem.qty = quantity;
       //update plant obj in cart to increase qty
       addToCart("UPDATE_QUANTITY_AMOUNT", cart,newItem, plantWithIdIndex)
+      
     }
   }
 
