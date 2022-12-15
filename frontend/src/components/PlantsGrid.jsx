@@ -43,7 +43,14 @@ const PlantsGrid = () => {
             width: "500px",
           }}
         >
-          <div style={{ display: "flex", flexDirection: "column", flex: 0.5 }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              flex: 0.5,
+              height: "60px",
+            }}
+          >
             <label for="plantTypes">Choose a type:</label>
 
             <select
@@ -62,7 +69,14 @@ const PlantsGrid = () => {
               })}
             </select>
           </div>
-          <div style={{ display: "flex", flexDirection: "column", flex: 0.5 }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              flex: 0.5,
+              height: "60px",
+            }}
+          >
             <label for="featured">Featured:</label>
             <select
               name="featured"
