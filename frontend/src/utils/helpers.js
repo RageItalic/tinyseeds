@@ -221,13 +221,22 @@ export async function getAllPlantsSold(month, year) {
   const db = getDatabase();
   let plants = [];
   let plantIds = [];
+  let map = [];
   try {
     const snapshot = await get(ref(db, `/purchaseOrders`)); //O(1)
     if (snapshot.val()) {
       Object.values(snapshot.val()).forEach((order) => {
         let date = new Date(order.date);
-        if (date.getMonth() == month && date.getFullYear() == year) {
+        if (date.getMonth() === month && date.getFullYear() === year) {
           Object.values(order.productsBought).forEach((plant) => {
+            //create a map between plants bought and qty
+            if (map[plant.productId] === undefined) {
+              map[plant.productId] = plant.qty;
+            } else {
+              map[plant.productId] =
+                new Number(map[plant.productId]) + new Number(plant.qty) + "";
+            }
+
             if (plantIds.indexOf(plant.productId) === -1) {
               plantIds.push(plant.productId);
             }
@@ -241,6 +250,7 @@ export async function getAllPlantsSold(month, year) {
 
   plantIds.forEach(async (plantId) => {
     let plant = await getPlant(plantId);
+    plant["qty"] = map[plantId];
     plants.push(plant);
   });
 
