@@ -84,7 +84,7 @@ const IndividualPlant = () => {
   const defaultThumbnailSrc = "https://assets.website-files.com/6053a1259d44f4eca4ad7ef4/6053d55d07cb850826279e78_Mini-thumbnail.jpg";
   // image = plant.imageURLS && plant.imageURLS[0];
   return (
-    <div style={{ backgroundColor: 'white' }}>
+    <div style={{ backgroundColor: 'white', paddingTop:'25px' }}>
       <div>
         <div className={styles.content_wrapper}>
           <div className={styles.flex}>
