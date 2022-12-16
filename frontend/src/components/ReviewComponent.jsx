@@ -2,6 +2,7 @@ import { nanoid } from 'nanoid';
 import * as React from 'react';
 import { addReview } from '../utils/helpers';
 import styles from "../styles/individualplants.module.css"
+import style from "../styles/reviewcomponent.module.css"
 
 const ReviewComponent = ({plantID, reviewAdded, setreviewAdded}) => {
   const [form, setForm] = React.useState({
@@ -48,10 +49,10 @@ const ReviewComponent = ({plantID, reviewAdded, setreviewAdded}) => {
   };
 
   return (
-    <div >
-      <h2>Add a review</h2>
-      <br/>
-      <form onSubmit={handleSubmit}>
+    <div style={{display:'flex', flexWrap:'wrap',alignItems: 'center', gap:'5'}}>
+      {/* <h2>Add a review</h2>
+      <br/> */}
+      <form onSubmit={handleSubmit} style={{flex: '1 0 50%'}}>
         <div>
           <input
             id="title"
@@ -59,7 +60,12 @@ const ReviewComponent = ({plantID, reviewAdded, setreviewAdded}) => {
             placeholder='Title'
             value={form.title}
             onChange={handleChange}
-            style={{background: 'white', border: '1px solid #e6e6e6', color: '#333', padding: '2px 10px 2px 20px', width: '100%', fontSize:'14px', height:'45px', marginBottom: '20px'}}
+            className={style.input}
+            style=
+            {{background: 'white', border: '1px solid #e6e6e6', color: '#333', 
+            padding: '2px 10px 2px 20px', 
+            width: '100%', 
+            fontSize:'14px', height:'45px', marginBottom: '10px'}}
           />
         </div>
         <div style={{ marginBottom: '5px'}}>
@@ -69,10 +75,10 @@ const ReviewComponent = ({plantID, reviewAdded, setreviewAdded}) => {
             placeholder='Description'
             value={form.description}
             onChange={handleChange}
-            style={{background: 'white', border: '1px solid #e6e6e6', color: '#333', padding: '20px 10px 2px 20px', width: '100%', fontSize:'14px', height:'180px', marginBottom: '20px', resize: 'horizontal'}}
+            style={{background: 'white', border: '1px solid #e6e6e6', color: '#333', padding: '20px 10px 2px 20px', width: '100%', fontSize:'14px', height:'180px', marginBottom: '10px', resize: 'horizontal'}}
           />
         </div>
-        <div style={{ marginBottom: '10px'}}>
+        <div style={{ marginBottom: '5px'}}>
           <input
             id="rating"
             type="number"
@@ -80,10 +86,12 @@ const ReviewComponent = ({plantID, reviewAdded, setreviewAdded}) => {
             value={form.rating}
             onChange={handleChange}
             max="5"
-            style={{background: 'white', border: '1px solid #e6e6e6', color: '#333', padding: '2px 10px 2px 20px', width: '100%', fontSize:'14px', height:'45px'}}
+            style={{background: 'white', border: '1px solid #e6e6e6', color: '#333', padding: '2px 10px 2px 20px', width: '100%', fontSize:'14px', height:'45px', marginBottom:'10px'}}
           />
         </div>
-        <button className={`${styles.w_commerce_commerceaddtocartbutton} ${styles.add_to_cart_button}`} onClick={handleSubmit}>Add to Cart</button>
+        <button 
+        className={`${styles.w_commerce_commerceaddtocartbutton} ${styles.add_to_cart_button}`} 
+        onClick={handleSubmit}>Add to Cart</button>
       </form>
     </div>
   );

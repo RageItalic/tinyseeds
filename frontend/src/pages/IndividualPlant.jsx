@@ -250,9 +250,11 @@ const IndividualPlant = () => {
       <div className={`${styles.content_wrapper} ${styles.w_container}`}>
         <div className={styles.flex}>
           <div style={{flex:1}}>
+            <h4>Add a Review</h4>
+            <br/>
             <ReviewComponent plantID={params.plantID} reviewAdded={reviewAdded} setreviewAdded={setreviewAdded} />
           </div>
-          <div style={{flex:1,marginLeft:'100px'}} className={styles.expand}>
+          <div style={{flex:1,paddingLeft: '55px'}} className={styles.expand}>
             <h4>All Reviews</h4>
 
 
