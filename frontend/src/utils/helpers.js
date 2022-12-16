@@ -120,6 +120,7 @@ export function saveOrder(purchaseOrder) {
  */
 export function addReview(review, pid) {
   const db = getDatabase();
+  console.log("this is a review in helper", review)
 
   set(ref(db, `/plants/${pid}/reviews/${review.id}`), review.value);
 }

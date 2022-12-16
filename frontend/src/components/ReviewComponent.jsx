@@ -1,12 +1,13 @@
 import { nanoid } from 'nanoid';
 import * as React from 'react';
 import { addReview } from '../utils/helpers';
+import styles from "../styles/individualplants.module.css"
 
 const ReviewComponent = ({plantID, reviewAdded, setreviewAdded}) => {
   const [form, setForm] = React.useState({
     title: '',
     description: '',
-    rating: 0,
+    rating: 1,
   });
 
   const handleChange = (event) => {
@@ -24,7 +25,7 @@ const ReviewComponent = ({plantID, reviewAdded, setreviewAdded}) => {
     const review = {
           id: reviewId,
           value: {
-            date: new Date().toDateString(),
+            date: new Date().toISOString(),
             description: form.description,
             id: reviewId,
             index: reviewId,
@@ -47,20 +48,11 @@ const ReviewComponent = ({plantID, reviewAdded, setreviewAdded}) => {
   };
 
   return (
-    <div>
+    <div >
       <h2>Add a review</h2>
       <br/>
       <form onSubmit={handleSubmit}>
-        {/* <div>
-          <label htmlFor="title">Title</label>
-          <input
-            id="title"
-            type="text"
-            value={form.title}
-            onChange={handleChange}
-          />
-        </div> */}
-        <div style={{marginBottom: '10px'}}>
+        <div>
           <input
             id="title"
             type="text"
@@ -87,6 +79,7 @@ const ReviewComponent = ({plantID, reviewAdded, setreviewAdded}) => {
             placeholder='Rating (from 0-5)'
             value={form.rating}
             onChange={handleChange}
+            max="5"
             style={{background: 'white', border: '1px solid #e6e6e6', color: '#333', padding: '2px 10px 2px 20px', width: '100%', fontSize:'14px', height:'45px'}}
           />
         </div>
