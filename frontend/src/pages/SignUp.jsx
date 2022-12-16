@@ -58,29 +58,29 @@ const SignUp = () => {
               onChange={(e) => setName(e.target.value)}
             />
             <div>
-              <h6 id={signUpStyles.underBoxText}>
+              <p id={signUpStyles.underBoxText}>
                 <b>Make sure it matches the name on your government ID</b>
-              </h6>
+              </p>
             </div>
             <input
               id={signUpStyles.input}
               type="text"
               placeholder="Email Address"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <br></br>
             <div>
-              <h6 id={signUpStyles.underBoxText}>
+              <p id={signUpStyles.underBoxText}>
                 <b>We'll email you purchase confirmation and receipts</b>
-              </h6>
+              </p>
             </div>
             <input
               id={signUpStyles.input}
               type="text"
               placeholder="Password"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <br />
             <br></br>

@@ -79,7 +79,7 @@ export async function getPlant(pid) {
  * Typical filter object looks like:
  * filter: {
  *   type: "Cactus"
- *   featured: false
+ *   featured: "disable"
  * }
  * @returns Returns array of plants with specified filter
  */
@@ -87,7 +87,7 @@ export const getAllPlants = async (filter) => {
   const db = getDatabase();
 
   //no filter passed. Return all plants
-  if (filter == null) {
+  if (filter === undefined || filter === null) {
     try {
       const snapshot = await get(ref(db, `/plants`));
       if (snapshot.exists()) {
@@ -96,16 +96,34 @@ export const getAllPlants = async (filter) => {
         consoe.log("no plants found");
       }
     } catch (e) {
-      console.error("gettting plants failed", e);
+      console.error("getting plants failed", e);
     }
   }
   let plants = [];
+  console.log(filter.featured);
   try {
     const snapshot = await get(ref(db, `/plants`));
     if (snapshot.exists()) {
-      Object.values(snapshot.val()).forEach((plant) => {
-        if (plant.featured == filter.featured && plant.type == filter.type) {
-          plants.push(plant);
+      Object.values(snapshot.val()).forEach(async (plant) => {
+        if (filter.type === "All") {
+          if (String(filter.featured) === "false") {
+            plants.push(plant);
+          } else {
+            if (filter.featured && plant.featured) {
+              plants.push(plant);
+            }
+          }
+        } else {
+          if (String(filter.featured) === "false") {
+            if (filter.type === plant.type) plants.push(plant);
+          } else {
+            if (
+              String(filter.featured) === String(plant.featured) &&
+              plant.type === filter.type
+            ) {
+              plants.push(plant);
+            }
+          }
         }
       });
     } else {
@@ -203,15 +221,25 @@ export async function getAllPlantsSold(month, year) {
   const db = getDatabase();
   let plants = [];
   let plantIds = [];
+  let map = [];
   try {
     const snapshot = await get(ref(db, `/purchaseOrders`)); //O(1)
     if (snapshot.val()) {
       Object.values(snapshot.val()).forEach((order) => {
         let date = new Date(order.date);
-        // console.log(`Month = ${date.getMonth()}\tYear = ${date.getFullYear()}`);
-        if (date.getMonth() == month && date.getFullYear() == year) {
+        if (date.getMonth() === month && date.getFullYear() === year) {
           Object.values(order.productsBought).forEach((plant) => {
-            plantIds.push(plant.productId);
+            //create a map between plants bought and qty
+            if (map[plant.productId] === undefined) {
+              map[plant.productId] = plant.qty;
+            } else {
+              map[plant.productId] =
+                new Number(map[plant.productId]) + new Number(plant.qty) + "";
+            }
+
+            if (plantIds.indexOf(plant.productId) === -1) {
+              plantIds.push(plant.productId);
+            }
           });
         }
       });
@@ -220,11 +248,64 @@ export async function getAllPlantsSold(month, year) {
     console.error(e);
   }
 
-  plantIds.forEach(async (plantId) => {
+  for (let i = 0; i < plantIds.length; i++) {
+    let plantId = plantIds[i];
     let plant = await getPlant(plantId);
+    plant["qty"] = map[plantId];
     plants.push(plant);
-  });
+  }
 
-  console.log(plants);
   return plants;
+}
+
+/**
+ * Get revenue in specific month
+ * @param {*} month Month being viewed
+ * @param {*} year Year being viewed
+ * @returns Revenue in given month and year
+ */
+export async function getMonthRevenue(month, year) {
+  const plantsInMonth = await getAllPlantsSold(month, year);
+  let revenue = 0;
+  console.log(plantsInMonth);
+  for (let i = 0; i < plantsInMonth.length; i++) {
+    revenue +=
+      new Number(plantsInMonth[i].price) * new Number(plantsInMonth[i].qty);
+  }
+
+  return revenue;
+}
+
+/**
+ * Returns revenue of website and products sold
+ * @returns All the revenue we generated and quantity of products we sold
+ */
+export async function getAllTimeRevenue() {
+  const db = getDatabase();
+  let result = {
+    revenue: 0,
+    productsSold: 0,
+  };
+
+  try {
+    const snapshot = await get(ref(db, `/purchaseOrders`));
+    if (snapshot.exists()) {
+      const allOrders = Object.values(snapshot.val());
+
+      for (let i = 0; i < allOrders.length; i++) {
+        const productsBought = Object.values(allOrders[i].productsBought);
+
+        for (let j = 0; j < productsBought.length; j++) {
+          let product = productsBought[j];
+          let plant = await getPlant(product.productId);
+          result.revenue += new Number(product.qty) * new Number(plant.price);
+          result.productsSold += new Number(product.qty);
+        }
+      }
+
+      return result;
+    }
+  } catch (e) {
+    console.error(e);
+  }
 }

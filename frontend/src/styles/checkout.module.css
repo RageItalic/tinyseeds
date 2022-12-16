@@ -110,7 +110,7 @@ input[type="text"] {
     margin-left: 15%;
   } */
 
-button[type="submit"] {
+.checkout {
     font-size: 28px;
     border-radius: 12px;
     padding: 5px 10px;

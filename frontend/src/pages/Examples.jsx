@@ -9,6 +9,8 @@ import {
   getUser,
   getAllPlants,
   getAllPlantsSold,
+  getMonthRevenue,
+  getAllTimeRevenue,
 } from "../utils/helpers";
 
 const exampleGet = async () => {
@@ -90,7 +92,9 @@ const Examples = () => {
     // saveOrder(testPurchaseOrder);  //DO NOT UNCOMMENT UNLESS YOUR NAME IS PAUL OR PARTH
     // getUser("lumcva");
     // getAllPlants(filter);
-    getAllPlantsSold(6, 2021);
+    // getAllPlantsSold(4, 2022);
+    getMonthRevenue(4, 2022);
+    // getAllTimeRevenue();
   }, []);
 
   return (
