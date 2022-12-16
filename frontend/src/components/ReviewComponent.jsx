@@ -59,7 +59,7 @@ const ReviewComponent = ({plantID, reviewAdded, setreviewAdded}) => {
             placeholder='Title'
             value={form.title}
             onChange={handleChange}
-            style={{background: 'white', border: '1px solid #e6e6e6', color: '#333', padding: '2px 10px 2px 20px', width: '100%', fontSize:'14px', height:'45px'}}
+            style={{background: 'white', border: '1px solid #e6e6e6', color: '#333', padding: '2px 10px 2px 20px', width: '100%', fontSize:'14px', height:'45px', marginBottom: '20px'}}
           />
         </div>
         <div style={{ marginBottom: '5px'}}>

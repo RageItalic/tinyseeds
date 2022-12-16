@@ -79,6 +79,10 @@ const IndividualPlant = () => {
       <div>Loading...</div>
     )
   }
+  const sortedAsc = plant.review && Object.values(plant.review).sort(
+    (objA, objB) => Number(objA.date) - Number(objB.date),
+  );
+
   const defaultThumbnailSrc = "https://assets.website-files.com/6053a1259d44f4eca4ad7ef4/6053d55d07cb850826279e78_Mini-thumbnail.jpg";
   // image = plant.imageURLS && plant.imageURLS[0];
   return (
@@ -254,8 +258,8 @@ const IndividualPlant = () => {
 
 
             {
-            plant.reviews && Object.values(plant.reviews).slice(0, 5).map((review, i) => (
-              
+            // plant.reviews && Object.values(plant.reviews).slice(0, 5).map((review, i) => (
+              plant.reviews && Object.values(plant.reviews).map((review, i) => (
           //reviews.map((review) => (
         <div
           style={{ display: "flex", flexDirection: "column" }}
