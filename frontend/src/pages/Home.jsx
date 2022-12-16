@@ -1,5 +1,6 @@
 import homeStyles from "../styles/home.module.css";
 import img from "../assets/homePic.png";
+import {Link} from "react-router-dom"
 
 const Home = () => {
   return (
@@ -10,17 +11,17 @@ const Home = () => {
           <img src={img} alt="plant pic" id={homeStyles.myImage} />
         </div>
         <div className={homeStyles.title} id={homeStyles.flexItem2}>
-          <h1>
+          <h1 style={{ color: "white" }}>
             <em>tiny</em>
             <br></br>seeds
             <div className={homeStyles.description}>
               <br></br>
-              <b>We love plants like you do</b>
+              <b>We love plants like you do.</b>
               <p>tiny seeds is a modern plants e-commerce store.</p>
             </div>
-            <button type="button" id={homeStyles.myButton}>
-              Go Shopping
-            </button>
+            <Link to="/plants" >
+             <button id={homeStyles.myButton}>Go Shopping</button>
+            </Link>
           </h1>
         </div>
       </div>
