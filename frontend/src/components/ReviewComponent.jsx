@@ -83,7 +83,7 @@ const ReviewComponent = ({plantID, reviewAdded, setreviewAdded}) => {
             style={{background: 'white', border: '1px solid #e6e6e6', color: '#333', padding: '2px 10px 2px 20px', width: '100%', fontSize:'14px', height:'45px'}}
           />
         </div>
-        <button type="submit" className="w-commerce-commerceaddtocartbutton add-to-cart-button" style={{ width: '50%'}}>Submit</button>
+        <button className={`${styles.w_commerce_commerceaddtocartbutton} ${styles.add_to_cart_button}`} onClick={handleSubmit}>Add to Cart</button>
       </form>
     </div>
   );

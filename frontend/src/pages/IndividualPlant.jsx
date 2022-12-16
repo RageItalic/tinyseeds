@@ -6,8 +6,6 @@ import ReviewComponent from '../components/ReviewComponent';
 import useCartStore from "../store/cart"
 import { getPlant } from '../utils/helpers';
 import styles from "../styles/individualplants.module.css"
-import { TableContainer, Table, TableHead, TableCell, TableBody, TableRow, TableFooter, TablePagination } from '@material-ui/core';
-import MaterialTable from 'material-table';
 
 
 
