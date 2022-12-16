@@ -6,6 +6,9 @@ import {
   getPlant,
   addReview,
   saveOrder,
+  getUser,
+  getAllPlants,
+  getAllPlantsSold,
 } from "../utils/helpers";
 
 const exampleGet = async () => {
@@ -77,6 +80,11 @@ const Examples = () => {
     },
   };
 
+  const filter = {
+    type: "Cactus",
+    featured: false,
+  };
+
   useEffect(() => {
     // exampleGet();
     // examplePost();
@@ -84,6 +92,9 @@ const Examples = () => {
     // getPlant("oldrle");
     // addReview(testReview, "oldrle"); //DO NOT UNCOMMENT UNLESS YOUR NAME IS PAUL OR PARTH
     // saveOrder(testPurchaseOrder);  //DO NOT UNCOMMENT UNLESS YOUR NAME IS PAUL OR PARTH
+    // getUser("lumcva");
+    // getAllPlants(filter);
+    getAllPlantsSold(6, 2021);
   }, []);
 
   return (

@@ -5,30 +5,16 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import usePlantStore from "../store/plants";
 import PlantCard from "./PlantCard";
-
-const getPlants = async (db) => {
-  try {
-    const snapshot = await get(ref(db, `/plants`));
-    if (snapshot.exists()) {
-      console.log(snapshot.val());
-      return Object.values(snapshot.val());
-    } else {
-      consoe.log("no plants found");
-    }
-  } catch (e) {
-    console.error("gettting plants failed", e);
-  }
-};
+import { getAllPlants } from "../utils/helpers";
 
 const PlantsGrid = () => {
-  const db = getDatabase();
   const [loading, setLoading] = useState(true);
   const plants = usePlantStore((state) => state.plants);
   const setPlants = usePlantStore((state) => state.setPlants);
 
   useEffect(() => {
     async function getAndSetPlants() {
-      const plantsFromDb = await getPlants(db);
+      const plantsFromDb = await getAllPlants();
       setPlants(plantsFromDb);
       setLoading(false);
     }

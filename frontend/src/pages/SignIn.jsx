@@ -37,62 +37,42 @@ const SignIn = () => {
 
   return (
     <div>
-      <div className={styles.container_1}>
-        {/* <div> */}
-        <div className={styles.form_container}>
-          <form onSubmit={(e) => handleSubmit(e)}>
-            <h1>Sign In</h1>
-            <p>Its party thyme, welcome back! &#127803;</p>
-            <div id="email">
-              <h4>email</h4>
-              <input
-                type="email"
-                placeholder="email..."
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
+        <div className={styles.container_1}>
+            <div className={styles.form_container}>
+                <form onSubmit={(e) => handleSubmit(e)}>
+                    {/* <h1 id="signIn_tag">Sign In</h1> */}
+                    <div className={styles.title_container}>
+                      <h1>Sign In</h1>
+                    </div>
+                    <div className={styles.blurb_container}>
+                      <p>Its party thyme, welcome back! &#127803;</p>
+                    {/* <p id="blurb_tag">Its party thyme, welcome back! &#127803;</p> */}
+                    </div>
+                    <div className={styles.email_container}>
+                      {/* <div id="email_tag">
+                        <h4>email</h4>
+                      </div> */}
+                      <h4 id="email_tag">email</h4>
+                      <input className={styles.form_input}  type="email" placeholder="email..." value={email} onChange={(e) => setEmail(e.target.value)}/>
+                    </div>
+                    <div className={styles.password_container}>
+                      {/* <div id="password_tag">
+                        <h4>password</h4>
+                      </div> */}
+                      <h4 id="password_tag">password</h4>
+                      <input className={styles.form_input} type="password" placeholder="password..." value={password} onChange={(e) => setPassword(e.target.value)} />
+                    </div>
+                    <div className={styles.signIn_container}>
+                        <input className="button" value="Sign-In" type="submit"/>
+                    </div>  
+                    {/* <button type="submit">Sign In</   button> */}
+                </form>
             </div>
-            <div id="password">
-              <h4>password</h4>
-              <input
-                type="password"
-                placeholder="password..."
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
+            <div className={styles.pic_container}>
+              <img src="/src/assets/sign-in-right.jpg" alt="sign-in" />
             </div>
-
-            <div className={styles.remember_container}>
-              <input
-                type="checkbox"
-                id="remember"
-                name="remember"
-                value="remember"
-              ></input>
-              {/* <label for="remember">Remember Me?</label> */}
-            </div>
-            <div className={styles.forgot_container}>
-              <input
-                type="checkbox"
-                id="forgot"
-                name="forgot"
-                value="forgot"
-              ></input>
-              {/* <label for="forgot">Forgot Username or Password?"</label> */}
-            </div>
-            <input
-              className="button-signIn"
-              value="Sign-In"
-              type="submit"
-            ></input>
-            {/* <button type="submit">Sign In</   button> */}
-          </form>
+            {/* </div> */}
         </div>
-        <div className={styles.pic_container}>
-          <img src="/src/assets/sign-in-right.jpg" alt="sign-in" />
-        </div>
-        {/* </div> */}
-      </div>
     </div>
   );
 };

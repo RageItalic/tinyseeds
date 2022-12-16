@@ -58,9 +58,9 @@ const SignUp = () => {
               onChange={(e) => setName(e.target.value)}
             />
             <div>
-              <h8 id={signUpStyles.underBoxText}>
+              <h6 id={signUpStyles.underBoxText}>
                 <b>Make sure it matches the name on your government ID</b>
-              </h8>
+              </h6>
             </div>
             <input
               id={signUpStyles.input}
@@ -71,9 +71,9 @@ const SignUp = () => {
             />
             <br></br>
             <div>
-              <h8 id={signUpStyles.underBoxText}>
+              <h6 id={signUpStyles.underBoxText}>
                 <b>We'll email you purchase confirmation and receipts</b>
-              </h8>
+              </h6>
             </div>
             <input
               id={signUpStyles.input}
