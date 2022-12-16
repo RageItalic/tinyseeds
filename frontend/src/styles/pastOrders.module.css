@@ -1,0 +1,64 @@
+#title {
+  margin-top: 50px;
+  text-align: center;
+}
+
+table.myTable {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin-left: 20px;
+}
+
+#header {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: center;
+  background-color: #474d3e;
+  color: white;
+}
+
+#row {
+  border: 1px solid #000000;
+  text-align: left;
+  padding: 8px;
+}
+
+#info {
+  border: 1px solid #000000;
+  text-align: left;
+  padding: 8px;
+  background-color: #e3e4de;
+}
+
+#infoUnique {
+  border: 1px solid #000000;
+  text-align: left;
+  padding: 8px;
+  background-color: #d0d4ca;
+}
+
+.previous {
+  background-color: #f1f1f1;
+  color: white;
+  font-size: 30px;
+  margin-right: 20px;
+  padding: 8px 16px;
+}
+
+.next {
+  background-color: #f1f1f1;
+  color: white;
+  font-size: 30px;
+  margin-right: 20px;
+  padding: 8px 16px;
+}
+
+#round {
+  border-radius: 50px;
+  background-color: #474d3e;
+}
+
+.buttons {
+  float: right;
+}
