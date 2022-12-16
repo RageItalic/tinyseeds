@@ -46,6 +46,7 @@ function App() {
             } 
           /> */}
           <Route path="/admin" element={<AdminDash />}/>
+          <Route path="/orders" element={<PastOrders />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/examples" element={<Examples />} />
         </Routes>

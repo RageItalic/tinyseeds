@@ -1,203 +1,182 @@
-
-/* ----------------------------------------------BODY STYLING---------------------------------------------- */
-.body{
-    background-color: #b0d4ca;
-}
-
 /* ----------------------------------------------CONTAINER STYLING---------------------------------------------- */
 
 /* container for the whole page */
-.container_1 { 
-    border-radius: 50px;
-    position: absolute;
-    /* background-color: darkred; */
-    background-color:#d0d4ca;
-    /* background-color: white; */
-    width: 100%;
-	border-radius: 3px;
-    padding: 20px;
-	display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    grid-gap: 10px;
-    border-radius: 40%;
+.container_1 {
+  border-radius: 50px;
+  position: absolute;
+  /* background-color: darkred; */
+  background-color: #d0d4ca;
+  width: 100%;
+  border-radius: 3px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-gap: 10px;
+  border-radius: 0%;
 }
 
 /* container for the form */
-.form_container{
-    display:flex;
-    size:120px;
-    position: relative;
-    /* background-color: #d3d3cb; */
-    /* background-color: aqua; */
-    background: #d0d4ca;
-	border-radius: 3px;
-    padding: 40px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    grid-gap: 10px;
-    border-radius: 20%;
-    width: 90%;
+.form_container {
+  display: flex;
+  size: 120px;
+  position: relative;
+  /* background-color: #d3d3cb; */
+  /* background-color: aqua; */
+  background: #d0d4ca;
+  border-radius: 3px;
+  padding: 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-gap: 10px;
+  border-radius: 20%;
+  width: 90%;
 }
 
-/* not sure */
-.pic_container{
-    display: flex;
-    position: relative;
-    background-color: #bbbfb6;
-    /* background-color: blueviolet; */
-    border-radius: 3px;
-    padding: 20px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    grid-gap: 10px;
-    border-radius: 20%;
-    width: 90px; 
+.pic_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  /* background-color: #bbbfb6; */
+  /* background-color: blueviolet; */
+  border-radius: 20%;
+  width: 90%;
 }
 
 /* container for the img */
-.pic_container > img{
-    display: flex;
-    padding: 40px;
-    /* position: relative; */
-    /* display: grid;  
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    grid-gap: 10px; */
-    border-radius: 20%;     /*round the edges of the img */
-    width: 90%;
-    float: right;
+.pic_container img {
+  display: flex;
+  border: 20px solid #bbbfb6;
+  border-radius: 20%; /*round the edges of the img */
+  width: 90%;
 }
 
 /* ----------------------------------------------FORM STYLING---------------------------------------------- */
-
-.form > h1{
-    color: #39442f;
-    font-style:normal;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
-    size: 50px;
-    align-items: right;
-    /* background-color: blue;          */
-    color:rgb(57,68,47);
-    margin-inline-start: auto;
-    text-align: center;
-    margin-top: 30%;
+.title_container {
+  margin-left: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background-color: #fff; */
 }
 
-.form > p{
-    color: #39442f;
-    font-style: italic;
-    font-size: 28px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    /* background-color: purple; */
-    /* padding-top: -40%; */
-    margin-inline-start: auto;
-    text-align: center;
+.title_container h1 {
+  width: 73%;
+  color: #39442f;
+  font-style: normal;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 6vw;
+  color: rgb(57, 68, 47);
+  /* text-align: center; */
+  margin-top: 20%;
+  margin-bottom: 0;
 }
 
-.email > h4{
-    color: #39442f;
-    font-size: 20px;
-    font-style: bold;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    /* background-color: pink; */
-    margin-top: 2%;
-    margin-left: 15%;
-    /* margin-inline-start: auto; */
-    /* text-align: center; */
+.blurb_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10%;
+  /* background-color: #fff; */
+  /* text-align: center; */
 }
 
-.remember_container{
-color: #39442f;
-font-size: 15px;
-font-style: bold;
-font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-margin-top: 2%;
-margin-left: 15%;
+.blurb_container p {
+  color: #39442f;
+  font-style: italic;
+  font-size: 1.5vw;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  width: 73%;
+  /* text-align: center; */
 }
 
-
-.forgot_container{
-color: #39442f;
-font-size: 15px;
-font-style: bold;
-font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-margin-top: 2%;
-margin-left: 15%;
+.email_container {
+  color: #39442f;
+  font-style: bold;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  margin-left: 15%;
 }
 
-.label[type=checkbox]{
-    color: #39442f;
-    font-size: 20px;
-    font-style: bold;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    /* background-color: pink; */
-    margin-top: 2%;
-    margin-left: 153%;;
-    /* margin-inline-start: auto; */
-    /* text-align: center; */
+.email_container h4,
+.password_container h4 {
+  margin-bottom: 0;
 }
 
+.password_container {
+  color: #39442f;
+  font-style: bold;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  margin-left: 15%;
+  /* width: 100%; */
+}
 
-.input{
-    text-align: center;
-    /* background-color: chartreuse; */
-    width: 100%;
+.signIn_container {
+  margin-left: 15%;
 }
 
 /* ----------------------------------------------INPUT STYLING---------------------------------------------- */
 /* input styling */
-input[type=email], select {
-    font-size: 20px;
-    background-color: #bbbfb6;
-    padding: 12px;
-    display: inline-block;
-    border: 1px solid #b2913d;
-    border-radius: 4px;
-    box-sizing: border-box;
-    display: flex;
-    width: 70%;
-    margin-left: 15%;
-    margin-bottom: 2%;
-    float: none;
+/* input[type="email"],
+input[type="password"] {
+  font-size: 20px;
+  background-color: #bbbfb6;
+  padding: 12px;
+  display: inline-block;
+  border: 1px solid #b2913d;
+  border-radius: 4px;
+  box-sizing: border-box;
+  display: flex;
+  width: 73%;
+  /* margin-left: 15%; */
+  /* margin-bottom: 2%;
+  color: #b2913d; */
+/* }  */
 
+
+.form_input{
+  font-size: 20px;
+  background-color: white;
+  padding: 12px;
+  display: inline-block;
+  border: 1px solid black;
+  border-radius: 4px;
+  box-sizing: border-box;
+  display: flex;
+  width: 73%;
+  margin-bottom: 2%;
+  color: #b2913d;
+  align-items: center;
+  justify-content: center;
 }
- 
-input[type=password], select {
-    font-size: 20px;
-    background-color:#bbbfb6;
-    padding: 12px 20px;
-    display: inline-block;
-    border: 1px solid #b2913d;
-    border-radius: 4px;
-    box-sizing: border-box;
-    display: flex;
-    width: 70%;
-    margin-left: 15%;
-    margin-bottom: 5%;
-    float: center;
-}
+
 
 /* button styling */
-input[type=button]:hover {
-    background-color: #c9b277;
-    color: rgb(57,68,47);
-    /* border-color: rgb(57,68,47); */
-} 
-
-input[type=button] {
-    font-size: 28px;
-    background-color: #5b765b;
-    border-radius: 12px;
-    padding: 5px 10px;
-    color: #e3bf5a;
-    /* border-color:#5b765b; */
-    cursor: pointer;
-    width: 70%;
-    margin-left: 15%;
-    ruby-align: right;
-    float: center;
+.signIn_container input[type="submit"]:hover {
+  background-color: #c9b277;
+  color: #39442f;
+  /* border-color: rgb(57,68,47); */
 }
 
-.button-flex,div{
-    display:block;
+.signin_container {
+  background-color: red;
 }
 
+.signIn_container input[type="submit"] {
+  font-size: 28px;
+  /* background-color: #5b765b; */
+  /* background-color: aqua; */
+  border-radius: 12px;
+  padding: 5px 10px;
+  color: #e3bf5a;
+  background-color: #39442f;
+  /* border-color:#5b765b; */
+  cursor: pointer;
+  width: 73%;
+  /* margin-left: 15%; */
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.button-flex,
+div {
+  display: block;
+}

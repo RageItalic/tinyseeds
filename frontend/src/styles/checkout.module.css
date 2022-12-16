@@ -1,0 +1,133 @@
+
+/* ----------------------------------------------RIGHT SIDE STYLING---------------------------------------------- */
+
+.form_container form{
+    background-color: white;
+    margin-bottom: 10%;
+    align-items: center;
+    justify-content: center;
+    overflow: auto;
+}
+
+.form_container{
+    overflow: auto;
+}
+
+.h1_container h1{
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    text-align: center;
+}
+
+.h4_container{
+    align-items: center;
+    justify-content: center;
+    margin-top: 0%;
+    text-align: center;
+}
+
+/* .label_form_container label {
+    font-style: bold;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15%;
+} */
+
+#email{
+    font-style: bold;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15%;
+}
+
+#address{
+    font-style: bold;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15%;
+}
+
+#cardInfo{
+    font-style: bold;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15%;
+}
+
+.form_input{
+    font-size: 20px;
+    background-color: white;
+    padding: 12px;
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 4px;
+    box-sizing: border-box;
+    display: flex;
+    width: 73%;
+    margin-bottom: 2%;
+    color: #b2913d;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15%;
+}
+
+/* input[type="email"] {
+    font-size: 20px;
+    background-color: white;
+    padding: 12px;
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 4px;
+    box-sizing: border-box;
+    display: flex;
+    width: 73%;
+    margin-bottom: 2%;
+    color: #b2913d;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15%;
+}
+
+input[type="text"] {
+    font-size: 20px;
+    background-color: white;
+    padding: 12px;
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 4px;
+    box-sizing: border-box;
+    display: flex;
+    width: 73%;
+    margin-bottom: 2%;
+    color: #b2913d;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15%;
+  } */
+
+.checkout {
+    font-size: 28px;
+    border-radius: 12px;
+    padding: 5px 10px;
+    color: white;
+    background-color: black;
+    cursor: pointer;
+    width: 73%;
+    border: none;
+    transition: all 0.3s ease;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15%;
+  }
+  
+  /* .button-flex,
+  div {
+    display: block;
+  } */
+
+  
