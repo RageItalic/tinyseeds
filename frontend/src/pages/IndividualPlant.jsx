@@ -242,6 +242,7 @@ const IndividualPlant = () => {
           </div>
         </div>
       </div>
+      <br/>
       <div className={`${styles.content_wrapper} ${styles.w_container}`}>
         <div className={styles.flex}>
           <div style={{flex:1}}>
@@ -253,7 +254,8 @@ const IndividualPlant = () => {
 
 
             {
-            plant.reviews && Object.values(plant.reviews).map((review, i) => (
+            plant.reviews && Object.values(plant.reviews).slice(0, 5).map((review, i) => (
+              
           //reviews.map((review) => (
         <div
           style={{ display: "flex", flexDirection: "column" }}
@@ -274,7 +276,7 @@ const IndividualPlant = () => {
                 alignItems: "baseline"
               }}
             >
-              <h4>{review.title}</h4>
+              <h4 style={{color:'green'}}>{review.title}</h4>
               
                 
                {/* {review.date} */}
