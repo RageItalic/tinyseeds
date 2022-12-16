@@ -41,6 +41,7 @@ const PlantsGrid = () => {
             flexDirection: "row",
             gap: "20px",
             width: "500px",
+            textAlign: "center",
           }}
         >
           <div
@@ -51,14 +52,14 @@ const PlantsGrid = () => {
               height: "60px",
             }}
           >
-            <label for="plantTypes">Choose a type:</label>
+            <label htmlFor="plantTypes">Type:</label>
 
             <select
               name="plantTypes"
               id="plantTypes"
               value={selectedPlantType}
               onChange={(e) => setSelectedPlantType(e.target.value)}
-              style={{ width: "150px" }}
+              style={{ width: "100px", height: "20px", margin: "5px" }}
             >
               {plantTypes.map((type, index) => {
                 return (
@@ -77,12 +78,13 @@ const PlantsGrid = () => {
               height: "60px",
             }}
           >
-            <label for="featured">Featured:</label>
+            <label htmlFor="featured">Featured:</label>
             <select
               name="featured"
               id="featured"
               value={selectedFeatured}
               onChange={(e) => setSelectedFeatured(e.target.value)}
+              style={{ width: "100px", height: "20px", margin: "5px" }}
             >
               {feature.map((featured, index) => {
                 return (
@@ -106,6 +108,8 @@ const PlantsGrid = () => {
       >
         {loading ? (
           <h3>Loading...</h3>
+        ) : plants.length === 0 ? (
+          <h3>No plants found</h3>
         ) : (
           plants.map((plant) => <PlantCard plant={plant} key={plant.id} />)
         )}

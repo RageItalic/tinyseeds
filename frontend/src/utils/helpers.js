@@ -248,12 +248,64 @@ export async function getAllPlantsSold(month, year) {
     console.error(e);
   }
 
-  plantIds.forEach(async (plantId) => {
+  for (let i = 0; i < plantIds.length; i++) {
+    let plantId = plantIds[i];
     let plant = await getPlant(plantId);
     plant["qty"] = map[plantId];
     plants.push(plant);
-  });
+  }
 
-  console.log(plants);
   return plants;
+}
+
+/**
+ * Get revenue in specific month
+ * @param {*} month Month being viewed
+ * @param {*} year Year being viewed
+ * @returns Revenue in given month and year
+ */
+export async function getMonthRevenue(month, year) {
+  const plantsInMonth = await getAllPlantsSold(month, year);
+  let revenue = 0;
+  console.log(plantsInMonth);
+  for (let i = 0; i < plantsInMonth.length; i++) {
+    revenue +=
+      new Number(plantsInMonth[i].price) * new Number(plantsInMonth[i].qty);
+  }
+
+  return revenue;
+}
+
+/**
+ * Returns revenue of website and products sold
+ * @returns All the revenue we generated and quantity of products we sold
+ */
+export async function getAllTimeRevenue() {
+  const db = getDatabase();
+  let result = {
+    revenue: 0,
+    productsSold: 0,
+  };
+
+  try {
+    const snapshot = await get(ref(db, `/purchaseOrders`));
+    if (snapshot.exists()) {
+      const allOrders = Object.values(snapshot.val());
+
+      for (let i = 0; i < allOrders.length; i++) {
+        const productsBought = Object.values(allOrders[i].productsBought);
+
+        for (let j = 0; j < productsBought.length; j++) {
+          let product = productsBought[j];
+          let plant = await getPlant(product.productId);
+          result.revenue += new Number(product.qty) * new Number(plant.price);
+          result.productsSold += new Number(product.qty);
+        }
+      }
+
+      return result;
+    }
+  } catch (e) {
+    console.error(e);
+  }
 }
