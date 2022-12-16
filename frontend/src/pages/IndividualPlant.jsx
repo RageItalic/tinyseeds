@@ -6,6 +6,11 @@ import ReviewComponent from '../components/ReviewComponent';
 import useCartStore from "../store/cart"
 import { getPlant } from '../utils/helpers';
 import styles from "../styles/individualplants.module.css"
+import { TableContainer,Table,TableHead,TableCell,TableBody,TableRow, TableFooter, TablePagination } from '@material-ui/core';
+import MaterialTable from 'material-table';
+
+
+
 
 
 const IndividualPlant = () => {
@@ -14,12 +19,17 @@ const IndividualPlant = () => {
   const [loading, setLoading] = useState("");
   const addToCart = useCartStore(state => state.addToCart)
   const cart = useCartStore(state => state.cart)
-  const [quantity, setQuantity] = useState(0);
   const [isActive, setIsActive] = useState(null);
   const [careguideisActive, setcareguideIsActive] = useState(null);
   const [shippingisActive, setshippingIsActive] = useState(null);
   const [reviewAdded, setreviewAdded] = useState(false);
-  const [image, setImage] = useState(plant.imageURLS && plant.imageURLS[0]);
+  const [image, setImage] = useState();
+
+  const columns = [
+    { title: "ID", field: "id" },
+    { title: "Name", field: "name" },
+   
+  ]
 
   const changeImage = () => {
     let value = image;
@@ -63,6 +73,8 @@ const IndividualPlant = () => {
       console.log("TESTING", plants)
       setLoading(false)
       setPlant(plants)
+      setImage(plants.imageURLS[0])
+      
     }
     getFromDb()
     localStorage.setItem('cart', JSON.stringify(cart))
@@ -75,6 +87,7 @@ const IndividualPlant = () => {
     )
   }
   const defaultThumbnailSrc = "https://assets.website-files.com/6053a1259d44f4eca4ad7ef4/6053d55d07cb850826279e78_Mini-thumbnail.jpg";
+  // image = plant.imageURLS && plant.imageURLS[0];
   return (
     <div>
       <div>
@@ -82,6 +95,7 @@ const IndividualPlant = () => {
           <div className={styles.flex}>
             <div className={styles.featured_left}>
               <div className={styles.sticky_navbar}>
+                {console.log(image)}
                 {
                   plant.imageURLS &&
                   <div>
@@ -99,7 +113,7 @@ const IndividualPlant = () => {
                   </div>
                 }
                 <div className={styles.previews}>
-                  <img src={image} alt={plant.name} />
+                  <img src={plant.imageURLS > 0 ? plant.imageURLS[0] : image} alt={plant.name}/>
                 </div>
               </div>
             </div>
@@ -241,29 +255,30 @@ const IndividualPlant = () => {
             <ReviewComponent plantID={params.plantID} reviewAdded={reviewAdded} setreviewAdded={setreviewAdded} />
           </div>
           <div className={styles.expand}>
-            <h3>All Reviews</h3>
-            <table>
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>About this product</th>
-                  <th>Rating (Out of 5)</th>
-                </tr>
 
-              </thead>
-              <tbody>
-                {
-                  plant.reviews && Object.keys(plant.reviews).map((key, i) =>
-                    <tr>
-                      <td>{plant.reviews[key].date}</td>
-                      <td><strong>{plant.reviews[key].title}</strong><br />{plant.reviews[key].description}</td>
-                      <td>{plant.reviews[key].ratingOutOf5}</td>
-                    </tr>
+                   <table>
+            <thead>
+              <tr>
+                                 <th>Date</th>
+                 <th>About this product</th>
+                 <th>Ratings (0-5)</th>
+               </tr>
 
-                  )
-                }
-              </tbody>
-            </table>
+            </thead>
+             <tbody>
+               {
+                 plant.reviews && Object.keys(plant.reviews).map((key, i) =>
+                  <tr>
+                    <td>{plant.reviews[key].date}</td>
+                    <td><strong>{plant.reviews[key].title}</strong><br />{plant.reviews[key].description}</td>
+                    <td>{plant.reviews[key].ratingOutOf5}</td>
+                  </tr>
+
+                 )
+                                }
+             </tbody>
+           </table>
+            
           </div>
         </div>
       </div>

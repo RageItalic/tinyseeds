@@ -24,7 +24,7 @@ const ReviewComponent = ({plantID, reviewAdded, setreviewAdded}) => {
     const review = {
           id: reviewId,
           value: {
-            date: new Date(),
+            date: new Date().toDateString(),
             description: form.description,
             id: reviewId,
             index: reviewId,
