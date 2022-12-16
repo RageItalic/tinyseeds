@@ -5,11 +5,14 @@
   background-position: cover;
   width: 100vw;
   height: 100vh;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .box {
-  position: relative;
-  float: right;
+  /* position: relative;
+  float: right; */
   width: 40%;
   background-color: #e3e4dd;
   border-radius: 2%;
@@ -31,8 +34,6 @@
 #underBoxText {
   color: #3f423a;
   font-size: 65%;
-  float: left;
-  padding-left: 11%;
 }
 
 #myButton {
