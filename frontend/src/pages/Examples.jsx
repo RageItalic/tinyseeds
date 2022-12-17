@@ -50,13 +50,17 @@ const Examples = () => {
   const testReview = {
     id: reviewId,
     value: {
-      date: "2017-09-20T06:45:16 +04:00",
+      date: "2017-09-20T06:45:16 +04:00", 
+      // date js date function (get UTC date)
       description:
         "sunt commodo nostrud irure nostrud voluptate culpa nostrud aliqua laboris laboris incididunt do nisi dolore fugiat elit nisi pariatur duis laboris et Lorem enim exercitation aliqua do mollit nisi ea in in veniam et proident labore cupidatat enim fugiat Lorem",
-      id: reviewId,
+     //user 
+        id: reviewId,
       index: "3",
       ratingOutOf5: "2.5",
+      //from user
       title: "look at this",
+      //from user
     },
   };
 
