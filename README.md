@@ -5,7 +5,6 @@
 **After finishing the set up, scroll down to workflow section of the ```README``` to see how to get started coding**
 
 ## How To Set Up the Project on Your Machine
-
 - Ensure you have Node on your machine
 - Clone this project using ```git clone``` via ```https``` (option available on top right section) of the projects github page
     -  Command will look like this in the terminal: ```git clone https://{url here} tinySEEDS```
@@ -19,18 +18,22 @@
 - Once the app is running, the terminal will print out a url that you can copy and paste into your browser to see the app.
 - Make sure each step finishes running before moving on to the next one.
 
-### Setting Up the Backend
-- In terminal (from outside of the tinySEEDS folder) type:
-    - first to go into the frontend folder: ```cd tinySEEDS/backend```
-    - second to install all dependencies from NPM and make sure the project has everything it needs to run: ```npm i```
-    - to run the backend: ```npm run dev```
-- Once the app is running, the terminal will print out a url that you can copy and paste into your browser to see the app.
-- Make sure each step finishes running before moving on to the next one.
+### Test Users To Sign In As And Other Information
+- We already have a few test users in our database that you can sign in as:
+    - Email: ```ilamcconnell@eplode.com``` & Password: ```test123```
+    - Email: ```u@ser.com``` & Password: ```test123```
+    - Email: ```p@rth.com``` & Password: ```test123```
+- To access the admin portal, click on the "Admin" button in the navbar and when prompted, type in ```test123``` as the password.
 
-## NOTE:
-- **If you want to run the backend and the frontend together, you need to have both apps running in different terminal windows**
-- Only the examples page on the frontend needs the backend to work properly. Nothing else. So don't run the backend unnecessarily.
-- If you try to run the examples page on the frontend and open up the console in the browser and see a bunch of errors, most likely, the backend is not running. Make sure to run the backend in a different terminal window to see the examples page working properly. 
+## Requirement Clarifications
+- Backend Testing: Curl Commands
+    - We do not have any curl commands to test the backend: 
+        - Since we don't have a traditional backend and are cloud native. 
+        - Our web application is meant to be tested in the browser with the user stories we've designed for.
+- SQL Schema:
+    - We did not use a traditional SQL database. Therefore, there is no SQL schema. However, we did use firebase's realtime database which is essentially a JSON object in the cloud and is therefore document based. The initial version of the document db we used is provided in the main folder on github (outside of the ```frontend``` directory). This can be imported into firebase. The version of the db in firebase can also be exported from there directly and that version will be a more up to date one.
+    
+
 
 ## Workflow Steps
 **Make sure to ALWAYS follow this whenever you start working on a feature**

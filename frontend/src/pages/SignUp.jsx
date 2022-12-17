@@ -2,8 +2,23 @@ import { useState, useEffect } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import useAuthStore from "../store/auth";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { getDatabase, ref, set } from "firebase/database";
 import signUpStyles from "../styles/SignUp.module.css";
+
+const setUserInDb = (name, email, id) => {
+    const db = getDatabase()
+    const user = {
+        id,
+        name,
+        email,
+        type: "USER"
+    }
+
+    set(ref(db, `/users/${id}`), user)
+
+}
+
 
 const SignUp = () => {
   const [name, setName] = useState("");
@@ -15,29 +30,23 @@ const SignUp = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    try {
-      const userCredentials = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      console.log(
-        "look here to see response from sign up method ",
-        userCredentials
-      );
-      userCredentials.user.displayName = name;
-      setUser(userCredentials.user);
-      navigate("/");
-    } catch (e) {
-      const eCode = e.code;
-      const eMessage = e.message;
-      console.log(eCode, eMessage);
-      alert("Signup failed. Try again.");
-      setName("");
-      setEmail("");
-      setPassword("");
+        try {
+            const userCredentials = await createUserWithEmailAndPassword(auth, email, password)
+            console.log("look here to see response from sign up method ", userCredentials)
+            userCredentials.user.displayName = name
+            setUserInDb(name, email, userCredentials.user.uid)
+            setUser(userCredentials.user)
+            navigate("/", { replace: true })
+        } catch (e) {
+            const eCode = e.code;
+            const eMessage = e.message;
+            console.log(eCode, eMessage)
+            alert("Signup failed. Try again.")
+            setName("")
+            setEmail("")
+            setPassword("")
+        }
     }
-  };
 
   return (
     <div className={signUpStyles.page}>
@@ -56,6 +65,7 @@ const SignUp = () => {
               placeholder="Full Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              required
             />
             <div>
               <p id={signUpStyles.underBoxText}>
@@ -64,10 +74,11 @@ const SignUp = () => {
             </div>
             <input
               id={signUpStyles.input}
-              type="text"
+              type="email"
               placeholder="Email Address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
             />
             <br></br>
             <div>
@@ -77,10 +88,11 @@ const SignUp = () => {
             </div>
             <input
               id={signUpStyles.input}
-              type="text"
+              type="password"
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
             <br />
             <br></br>

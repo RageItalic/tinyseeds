@@ -32,7 +32,9 @@ const examplePost = async () => {
   };
 
   try {
-    let response = await axios.post("http://localhost:8080/getOrderHistory");
+    let response = await axios.post(
+      "http://localhost:8080/create-checkout-session"
+    );
     console.log("look here ", response.data);
     window.location.replace(response.data.url);
   } catch (e) {
@@ -90,7 +92,14 @@ const Examples = () => {
   useEffect(() => {
     // exampleGet();
     // examplePost();
-    // getOrderHistory("fvc63b");
+
+    async function test() {
+      let data = await getOrderHistory("fvc63b")
+      console.log("LUKE HERE", data)
+    }
+    test()
+
+    // console.log("LUKE here ", async function () {});
     // getPlant("oldrle");
     // addReview(testReview, "oldrle"); //DO NOT UNCOMMENT UNLESS YOUR NAME IS PAUL OR PARTH
     // saveOrder(testPurchaseOrder);  //DO NOT UNCOMMENT UNLESS YOUR NAME IS PAUL OR PARTH

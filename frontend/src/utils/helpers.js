@@ -141,7 +141,7 @@ export const getAllPlants = async (filter) => {
  * Save a purchase order in the database
  * @param {} purchaseOrder The order
  * Here is an example purchaseOrder object
-const testPurchaseOrder = {
+  const testPurchaseOrder = {
     id: orderId,
     value: {
       id: orderId,
@@ -259,6 +259,21 @@ export async function getAllPlantsSold(month, year) {
   return plants;
 }
 
+
+export const getUserCount = async () => {
+  const db = getDatabase()
+
+  try {
+    const snapshot = await get(ref(db, '/users'))
+    if (snapshot.exists()) {
+      return Object.values(snapshot.val()).length
+    }
+  } catch (e) {
+    console.error("User count failed", e)
+  }
+
+  return 0
+}
 /**
  * Get revenue in specific month
  * @param {*} month Month being viewed

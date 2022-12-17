@@ -1,4 +1,3 @@
-import { signOut } from "firebase/auth";
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import PureModal from "react-pure-modal";
@@ -6,9 +5,13 @@ import "react-pure-modal/dist/react-pure-modal.min.css";
 import { useAuth } from "../hooks/useAuth";
 import useAuthStore from "../store/auth";
 import useCartStore from "../store/cart";
+import { signOut } from "firebase/auth";
+import Cart from './Cart'
+import 'react-pure-modal/dist/react-pure-modal.min.css';
 import { auth } from "../utils/firebase";
-import Cart from "./Cart";
 import navStyles from "../styles/nav.module.css";
+import Wishlist from "./Wishlist";
+import useWishlistStore from "../store/wishlist";
 
 const Nav = () => {
   const navigate = useNavigate();
@@ -16,8 +19,11 @@ const Nav = () => {
   const setUser = useAuthStore((state) => state.setUser);
   const cart = useCartStore((state) => state.cart);
   const addToCart = useCartStore((state) => state.addToCart);
+  const wishlist = useWishlistStore((state) => state.wishlist);
+  const addToWishlist = useWishlistStore((state) => state.addToWishlist);
   const { isAuthenticated, isVerifying } = useAuth();
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [wishlistOpen, setWishlistOpen] = useState(false);
 
   async function handleUserSignOut() {
     try {
@@ -41,12 +47,23 @@ const Nav = () => {
         ? addToCart("LOAD_EXISTING_CART", newCart)
         : addToCart("LOAD_EXISTING_CART", []);
     }
-    console.log("isVerifying: ", isVerifying);
+
+    //get wishlist from localstorage on page refresh
+    if (wishlist.length === 0) {
+      
+      let newWishlist = JSON.parse(localStorage.getItem("wishlist"))
+      console.log("HELLO CHECKING", newWishlist)
+      newWishlist !== null
+        ? addToWishlist(undefined, "LOAD_EXISTING_WISHLIST", newWishlist)
+        : addToWishlist([])
+    }
+    // console.log("isVerifying: ", isVerifying);
   }, [isVerifying]);
 
   return (
     <nav>
       <Cart modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} />
+      <Wishlist wishlistOpen={wishlistOpen} setWishlistOpen={setWishlistOpen} />
       {isVerifying && <p>loading...</p>}
       {user && isAuthenticated ? (
         <>
@@ -55,13 +72,10 @@ const Nav = () => {
               <Link to="/">Tiny Seeds</Link>
             </li>
             <li id={navStyles.li}>
-              <Link to="/plants"> Plants</Link>
+              <Link to="/plants">Plants</Link>
             </li>
             <li id={navStyles.li}>
-              <Link to="/plants/1">Individual Plant</Link>
-            </li>
-            <li id={navStyles.li}>
-              <Link to="/examples">Examples</Link>
+              <Link to="/admin">Admin</Link>
             </li>
             <div className="right">
               <li id={navStyles.liRight}>
@@ -77,7 +91,7 @@ const Nav = () => {
                 <a onClick={() => setModalIsOpen(true)}>Cart ({cart.length})</a>
               </li>
               <li id={navStyles.liRight}>
-                <a> Wishlist</a>
+                <a onClick={() => setWishlistOpen(true)}>Wishlist ({wishlist.length})</a>
               </li>
             </div>
           </ul>
@@ -86,19 +100,13 @@ const Nav = () => {
         <>
           <ul id={navStyles.list}>
             <li id={navStyles.li}>
-              <Link to="/Home">Tiny Seeds</Link>
+              <Link to="/">Tiny Seeds</Link>
             </li>
             <li id={navStyles.li}>
-              <Link to="/plants"> Plants</Link>
+              <Link to="/plants">Plants</Link>
             </li>
             <li id={navStyles.li}>
-              <Link to="/examples">Cart</Link>
-            </li>
-            <li id={navStyles.li}>
-              <Link to="/plants/1">Individual Plant</Link>
-            </li>
-            <li id={navStyles.li}>
-              <Link to="/examples">Examples</Link>
+              <Link to="/admin">Admin</Link>
             </li>
             <div className="right">
               <li id={navStyles.liRight}>
@@ -118,4 +126,4 @@ const Nav = () => {
   );
 };
 
-export default Nav;
+export default Nav

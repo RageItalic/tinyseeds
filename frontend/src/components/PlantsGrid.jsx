@@ -1,8 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
-import { get, getDatabase, ref } from "firebase/database";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
 import usePlantStore from "../store/plants";
 import PlantCard from "./PlantCard";
 import { getAllPlants } from "../utils/helpers";
@@ -22,8 +19,7 @@ const PlantsGrid = () => {
       type: selectedPlantType,
       featured: selectedFeatured,
     };
-
-    console.log(selectedFeatured + "howdy");
+    
     async function getAndSetPlants(filter) {
       const plantsFromDb = await getAllPlants(filter);
       setPlants(plantsFromDb);
@@ -111,7 +107,7 @@ const PlantsGrid = () => {
         ) : plants.length === 0 ? (
           <h3>No plants found</h3>
         ) : (
-          plants.map((plant) => <PlantCard plant={plant} key={plant.id} />)
+          plants.map((plant) => <PlantCard plant={plant} key={plant.id} addToCartVisible={true} addToWishlistVisible={true} />)
         )}
       </div>
     </>

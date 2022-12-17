@@ -2,9 +2,19 @@ import { useState, useEffect } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import useAuthStore from "../store/auth";
-import { redirect, useNavigate } from "react-router-dom";
-import { getDatabase, ref, set } from "firebase/database";
+import { useNavigate } from "react-router-dom";
+import { get, getDatabase, ref, set } from "firebase/database";
 import styles from "../styles/signIn.module.css";
+
+export const getUser = async (uid) => {
+    const db = getDatabase()
+
+    const snapshot = await get(ref(db, `/users/${uid}`))
+    if (snapshot.exists()) {
+        return snapshot.val()
+    }
+    return null
+}
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -16,16 +26,38 @@ const SignIn = () => {
     event.preventDefault();
 
     try {
+
+
       const userCredentials = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
+          auth,
+          email,
+          password
       );
       console.log("look here bruh ", userCredentials);
+
+      const userFromDb = await getUser(userCredentials.user.uid)
+      console.log("user from db w/ email", userFromDb)
+
+      if (userFromDb === null) {
+          console.error("User not found. Need to sign up again and/or contact us.")
+          alert("User not found. Please try to sign up again and/or contact us.")
+          setEmail("")
+          setPassword("")
+          return
+      }
+
+      userCredentials.user.displayName = userFromDb.name
+
+      let authorizedUser = {
+          ...userCredentials.user
+      }
+
+      console.log("LOOOOKOKOKKOKOKOKOKOKOK", authorizedUser)
+
       //set user in store
-      setUser(userCredentials.user);
-      navigate("/");
-    } catch (e) {
+      setUser(authorizedUser);
+      navigate("/", { replace: true });
+  } catch (e) {
       const eCode = e.code;
       const eMessage = e.message;
       console.log(eCode, eMessage);

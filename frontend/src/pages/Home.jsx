@@ -1,11 +1,11 @@
 import homeStyles from "../styles/home.module.css";
 import img from "../assets/homePic.png";
-import {Link} from "react-router-dom"
+import {Link, useNavigate, useSearchParams} from "react-router-dom"
+import { useEffect } from "react";
 
 const Home = () => {
   return (
     <div className={homeStyles.home}>
-      {/* <img src={img} alt="plant pic" id="myImage" /> */}
       <div className={homeStyles.flexContainer}>
         <div className={homeStyles.image} id={homeStyles.flexItem1}>
           <img src={img} alt="plant pic" id={homeStyles.myImage} />
