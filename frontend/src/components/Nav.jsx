@@ -72,13 +72,10 @@ const Nav = () => {
               <Link to="/">Tiny Seeds</Link>
             </li>
             <li id={navStyles.li}>
-              <Link to="/plants"> Plants</Link>
+              <Link to="/plants">Plants</Link>
             </li>
             <li id={navStyles.li}>
-              <Link to="/plants/1">Individual Plant</Link>
-            </li>
-            <li id={navStyles.li}>
-              <Link to="/examples">Examples</Link>
+              <Link to="/admin">Admin</Link>
             </li>
             <div className="right">
               <li id={navStyles.liRight}>
@@ -103,19 +100,13 @@ const Nav = () => {
         <>
           <ul id={navStyles.list}>
             <li id={navStyles.li}>
-              <Link to="/Home">Tiny Seeds</Link>
+              <Link to="/">Tiny Seeds</Link>
             </li>
             <li id={navStyles.li}>
-              <Link to="/plants"> Plants</Link>
+              <Link to="/plants">Plants</Link>
             </li>
             <li id={navStyles.li}>
-              <Link to="/examples">Cart</Link>
-            </li>
-            <li id={navStyles.li}>
-              <Link to="/plants/1">Individual Plant</Link>
-            </li>
-            <li id={navStyles.li}>
-              <Link to="/examples">Examples</Link>
+              <Link to="/admin">Admin</Link>
             </li>
             <div className="right">
               <li id={navStyles.liRight}>

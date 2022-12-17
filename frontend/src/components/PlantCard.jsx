@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import useAuthStore from "../store/auth";
 import useCartStore from "../store/cart";
 import useWishlistStore from "../store/wishlist";
 import allPlantStyles from "../styles/allPlants.module.css";
@@ -13,6 +14,7 @@ const PlantCard = (props) => {
   const wishlist = useWishlistStore(state => state.wishlist)
   const addToWishlist = useWishlistStore(state => state.addToWishlist)
   const removeFromWishlist = useWishlistStore(state => state.removeFromWishlist)
+  const user = useAuthStore(state => state.user)
   
   const handleAddToCart = (plantId) => {
     //if cart has plant with given id, just update qty and reset specific object on cart
@@ -60,23 +62,25 @@ const PlantCard = (props) => {
         <Link to={`/plants/${plant.id}`}>
           <img src={plant.imageURLS[0]} width="100%" height="auto" />
         </Link>
-        <p 
-          onClick={() => handleWishlistClick(plant)}
-          style={{
-            position: "absolute",
-            top: "-3%",
-            zIndex: "1",
-            right: "4%",
-            color: "white",
-            fontSize: "25px",
-            cursor: "pointer"
-          }}
-        >
-          {addToWishlistVisible && wishlist.find(p => p.id === plant.id) === undefined 
-            ? "☆"
-            : "⭐️"
-          }
-        </p>
+        {user &&
+          <p 
+            onClick={() => handleWishlistClick(plant)}
+            style={{
+              position: "absolute",
+              top: "-3%",
+              zIndex: "1",
+              right: "4%",
+              color: "white",
+              fontSize: "25px",
+              cursor: "pointer"
+            }}
+          >
+            {addToWishlistVisible && wishlist.find(p => p.id === plant.id) === undefined 
+              ? "☆"
+              : "⭐️"
+            }
+          </p>
+        }
         {addToCartVisible &&
           <button
             style={{

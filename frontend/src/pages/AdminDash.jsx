@@ -24,7 +24,7 @@ const years = [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
 
 const AdminDash = () => {
     const [loading, setLoading] = useState(true)
-    const [selectedMonth, setSelectedMonth] = useState(months.indexOf("January"))
+    const [selectedMonth, setSelectedMonth] = useState(months.indexOf("December"))
     const [selectedYear, setSelectedYear] = useState(2022)
     const [productsSold, setProductsSold] = useState([])
     const [userCount, setUserCount] = useState(0)
