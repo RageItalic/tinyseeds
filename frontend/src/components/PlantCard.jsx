@@ -62,7 +62,7 @@ const PlantCard = (props) => {
         <Link to={`/plants/${plant.id}`}>
           <img src={plant.imageURLS[0]} width="100%" height="auto" />
         </Link>
-        {user &&
+        {user && addToWishlistVisible &&
           <p 
             onClick={() => handleWishlistClick(plant)}
             style={{

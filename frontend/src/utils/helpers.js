@@ -8,6 +8,33 @@ import { getDatabase, get, ref, child, set } from "firebase/database";
  * @param {*} userId id of the user
  * @returns Order object containing plants and
  */
+export async function getPurchaseHistory(userId) {
+  const db = getDatabase()
+  console.log("userID", userId)
+
+  try {
+    const snapshot = await get(ref(db, '/purchaseOrders'))
+    if (snapshot.exists()) {
+      let userPurchases = Object.values(snapshot.val()).filter(purchase => purchase.buyerId === userId)
+
+      console.log(userPurchases)
+      let filteredUserPurchases = userPurchases.map(purchase => ({
+        date: purchase.date,
+        id: purchase.id,
+        status: purchase.status,
+        totalPrice: purchase.totalPrice
+      }))
+      return filteredUserPurchases
+    }
+  } catch (e) {
+    console.error("Purchase history fetch failed")
+  }
+
+}
+
+
+
+
 export async function getOrderHistory(userId) {
   const db = getDatabase();
   var orders = [];
@@ -48,6 +75,9 @@ export async function getOrderHistory(userId) {
 
     order.productsBought = plantsOrdered;
   });
+
+  console.log('function called', orders)
+
   return orders;
 }
 
