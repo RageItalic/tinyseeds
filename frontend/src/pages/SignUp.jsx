@@ -65,6 +65,7 @@ const SignUp = () => {
               placeholder="Full Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              required
             />
             <div>
               <p id={signUpStyles.underBoxText}>
@@ -73,10 +74,11 @@ const SignUp = () => {
             </div>
             <input
               id={signUpStyles.input}
-              type="text"
+              type="email"
               placeholder="Email Address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
             />
             <br></br>
             <div>
@@ -86,10 +88,11 @@ const SignUp = () => {
             </div>
             <input
               id={signUpStyles.input}
-              type="text"
+              type="password"
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
             <br />
             <br></br>

@@ -5,6 +5,7 @@ import useAuthStore from "../store/auth"
 import useCartStore from "../store/cart"
 import { nanoid } from 'nanoid'
 import styles from "../styles/checkout.module.css";
+import { saveOrder } from "../utils/helpers"
 
 
 
@@ -48,26 +49,31 @@ const Checkout = () => {
         if (checkoutAttempt <= 1 ) {
             //success
 
-            let productsBought = cart.map(item => ({
-                id: nanoid(),
-                productId: item.id,
-                qty: item.qty
-            }))
-
+            let productsBought = {}
+            cart.forEach(item => {
+                let id = nanoid()
+                productsBought[id] = {
+                    id,
+                    productId: item.id,
+                    qty: item.qty
+                }
+            })
+            let purchaseOrderId = nanoid()
             let purchaseOrder = {
-                id: nanoid(),
-                buyerId: user ? user.uid : `guest-${nanoid()}`,
-                email: user ? user.email : email,
-                date: Date.now(),
-                productsBought,
-                status: "ORDERED",
-                totalPrice: cartTotal
+                id: purchaseOrderId,
+                value: {
+                    id: purchaseOrderId,
+                    buyerId: user ? user.uid : `guest-${nanoid()}`,
+                    email: user ? user.email : email,
+                    date: new Date().toISOString(),
+                    productsBought,
+                    status: "ORDERED",
+                    totalPrice: cartTotal
+                }
             }
 
-            console.log("purchase order made: ", purchaseOrder)
-
             //call helper function here to store purchase order in purchase order node
-
+            saveOrder(purchaseOrder)
 
             //empty cart after payment 
             localStorage.removeItem('cart')
@@ -119,33 +125,33 @@ const Checkout = () => {
         let userExpYear = Number(exp.split("/")[1])
 
         if (userExpYear > todayYear){
-            console.log("User Year valid!",userExpYear )
-            console.log("TODAY YEAR", todayYear)
-            console.log("TODAY MONTH", todayMonth)
-            console.log("CHECKING EXP", exp)
+            // console.log("User Year valid!",userExpYear )
+            // console.log("TODAY YEAR", todayYear)
+            // console.log("TODAY MONTH", todayMonth)
+            // console.log("CHECKING EXP", exp)
             return true
         }
         else if (todayYear === userExpYear){
             if(userExpMonth > todayMonth){
-                console.log("TODAY YEAR", todayYear)
-                console.log("TODAY MONTH", todayMonth)
-                console.log("CHECKING EXP", exp)
-                console.log("User Month valid!",userExpMonth)
+                // console.log("TODAY YEAR", todayYear)
+                // console.log("TODAY MONTH", todayMonth)
+                // console.log("CHECKING EXP", exp)
+                // console.log("User Month valid!",userExpMonth)
                 return true
             }
             if(userExpMonth === todayMonth){
-                console.log("TODAY YEAR", todayYear)
-                console.log("TODAY MONTH", todayMonth)
-                console.log("CHECKING EXP", exp)
-                console.log("User Month valid!",userExpMonth)
+                // console.log("TODAY YEAR", todayYear)
+                // console.log("TODAY MONTH", todayMonth)
+                // console.log("CHECKING EXP", exp)
+                // console.log("User Month valid!",userExpMonth)
                 return true
             }
         }
         // else{
             // return false
-            console.log("TODAY YEAR", todayYear)
-            console.log("TODAY MONTH", todayMonth)
-            console.log("CHECKING EXP", exp)
+            // console.log("TODAY YEAR", todayYear)
+            // console.log("TODAY MONTH", todayMonth)
+            // console.log("CHECKING EXP", exp)
 
             alert("Checking...Card not valid!")
             setExp("")

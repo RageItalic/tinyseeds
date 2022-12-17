@@ -1,14 +1,18 @@
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
-import useAuthStore from "../store/auth";
 import useCartStore from "../store/cart";
+import useWishlistStore from "../store/wishlist";
 import allPlantStyles from "../styles/allPlants.module.css";
 
 const PlantCard = (props) => {
   const plant = props.plant
+  const addToCartVisible = props.addToCartVisible
+  const addToWishlistVisible = props.addToWishlistVisible
   const addToCart = useCartStore(state => state.addToCart)
   const cart = useCartStore(state => state.cart)
+  const wishlist = useWishlistStore(state => state.wishlist)
+  const addToWishlist = useWishlistStore(state => state.addToWishlist)
+  const removeFromWishlist = useWishlistStore(state => state.removeFromWishlist)
   
   const handleAddToCart = (plantId) => {
     //if cart has plant with given id, just update qty and reset specific object on cart
@@ -35,10 +39,20 @@ const PlantCard = (props) => {
     }
   }
 
+  const handleWishlistClick = (plant) => {
+    wishlist.find(p => p.id === plant.id) === undefined
+      ? addToWishlist(plant)
+      : removeFromWishlist(wishlist, plant.id)
+  }
+
   useEffect(() => {
     //store cart in localStorage every time it updates
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
+
+  useEffect(() => {
+    localStorage.setItem('wishlist', JSON.stringify(wishlist))
+  }, [wishlist])
 
   return (
     <div style={{ maxWidth: "300px" }}>
@@ -46,19 +60,39 @@ const PlantCard = (props) => {
         <Link to={`/plants/${plant.id}`}>
           <img src={plant.imageURLS[0]} width="100%" height="auto" />
         </Link>
-        <button
+        <p 
+          onClick={() => handleWishlistClick(plant)}
           style={{
             position: "absolute",
-            bottom: "5%",
-            width: "95%",
+            top: "-3%",
             zIndex: "1",
-            right: "2.5%",
+            right: "4%",
             color: "white",
+            fontSize: "25px",
+            cursor: "pointer"
           }}
-          onClick={() => handleAddToCart(plant.id)}
         >
-          Add To Cart
-        </button>
+          {addToWishlistVisible && wishlist.find(p => p.id === plant.id) === undefined 
+            ? "☆"
+            : "⭐️"
+          }
+        </p>
+        {addToCartVisible &&
+          <button
+            style={{
+              position: "absolute",
+              bottom: "5%",
+              width: "95%",
+              zIndex: "1",
+              right: "2.5%",
+              color: "white",
+              borderRadius: "8px",
+            }}
+            onClick={() => handleAddToCart(plant.id)}
+          >
+            Add To Cart
+          </button>
+        }
       </div>
       <Link to={`/plants/${plant.id}`}>
         <div

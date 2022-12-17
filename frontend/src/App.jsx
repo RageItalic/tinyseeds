@@ -13,6 +13,7 @@ import CheckoutSuccess from './pages/CheckoutSuccess'
 import CheckoutError from './pages/CheckoutError'
 // import RequireAdminAuth from './components/RequireAdminAuth'
 import AdminDash from './pages/AdminDash'
+import PastOrders from './pages/PastOrders'
 
 
 
